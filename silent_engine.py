@@ -425,7 +425,21 @@ def simulate_combat(
         # End of turn
         deck_state.discard_hand()
         
-        # Enemy turn
+        # Enemy turn - POISON TRIGGERS AT START OF ENEMY TURN (BEFORE ACTIONS)
+        # Per verified game mechanics: poison triggers at the START of the
+        # poisoned creature's turn, then decrements by 1. Poison bypasses block.
+        poison_damage = process_poison_tick(enemy)
+        
+        # Check if enemy died from poison before acting
+        if enemy.hp <= 0:
+            result.win = True
+            result.final_hp = player.hp
+            result.enemy_hp = enemy.hp
+            result.damage_taken = starting_hp - player.hp
+            result.peak_poison = peak_poison
+            return result
+        
+        # Enemy takes action after poison
         if enemy.intent == Intent.ATTACK:
             apply_damage_to_player(player, enemy.intent_value, enemy)
         elif enemy.intent == Intent.BUFF:
@@ -437,9 +451,6 @@ def simulate_combat(
                 player.artifact -= 1
             else:
                 player.dexterity -= 1
-        
-        # Process poison at end of enemy turn
-        poison_damage = process_poison_tick(enemy)
         
         if enemy.hp <= 0:
             result.win = True
