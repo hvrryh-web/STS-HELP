@@ -10,6 +10,8 @@ This repository provides a comprehensive knowledge base and production-grade sim
 - **📖 Verified Mechanics**: Cross-referenced and verified game rules from official sources
 - **🎮 Quick Start Guide**: Get up and running quickly
 - **📋 Full Documentation**: Comprehensive API and usage documentation
+- **🧠 Research Documentation**: Deep dive into strategy, AI/ML research, and quantum economics
+- **🛠️ Decision-Support Tools**: Prototype tools for synergy analysis and path optimization
 
 ### Simulation Framework
 - **Deterministic RNG** via `numpy.random.SeedSequence` for reproducible runs
@@ -27,24 +29,33 @@ This repository provides a comprehensive knowledge base and production-grade sim
 
 ```
 docs/
-├── QUICK_START.md          # Quick start guide
-├── FULL_HELP.md            # Complete API documentation
-├── USEME.md                # Helper tool reference
-├── GAME_MECHANICS.md       # Game rules reference
-└── VERIFIED_GAME_DATA.md   # Cross-verified game data
+├── QUICK_START.md               # Quick start guide
+├── FULL_HELP.md                 # Complete API documentation
+├── USEME.md                     # Helper tool reference
+├── GAME_MECHANICS.md            # Game rules reference
+├── VERIFIED_GAME_DATA.md        # Cross-verified game data
+├── STS_STRATEGY_RESEARCH.md     # Deep dive into STS mechanics and AI research
+├── AI_ML_RESEARCH.md            # Survey of AI/ML academic papers
+├── QUANTIZING_ECONOMICS.md      # Quantum economics and decision theory
+└── GLOSSARY.md                  # Unified glossary for all topics
 
 data/
 ├── cards/
-│   ├── ironclad_cards.json # All Ironclad cards
-│   ├── silent_cards.json   # All Silent cards
-│   ├── defect_cards.json   # All Defect cards
-│   └── watcher_cards.json  # All Watcher cards
+│   ├── ironclad_cards.json      # All Ironclad cards
+│   ├── silent_cards.json        # All Silent cards
+│   ├── defect_cards.json        # All Defect cards
+│   └── watcher_cards.json       # All Watcher cards
 ├── relics/
-│   └── relics.json         # All relics by category
+│   └── relics.json              # All relics by category
 ├── enemies/
-│   └── enemies.json        # Enemy stats and patterns
+│   └── enemies.json             # Enemy stats and patterns
 └── keywords/
-    └── keywords.json       # Game keyword definitions
+    └── keywords.json            # Game keyword definitions
+
+tools/
+├── synergy_analyzer.py          # Card/relic synergy analysis tool
+├── path_optimizer.py            # Entropy-based path recommendation
+└── README.md                    # Tools documentation
 ```
 
 ### Key Documentation Links
@@ -56,6 +67,16 @@ data/
 | [USEME Guide](docs/USEME.md) | Command-line examples |
 | [Game Mechanics](docs/GAME_MECHANICS.md) | Verified game rules |
 | [Verified Data](docs/VERIFIED_GAME_DATA.md) | Cross-referenced data source |
+
+### Research Documentation
+
+| Document | Description |
+|----------|-------------|
+| [STS Strategy & Research](docs/STS_STRATEGY_RESEARCH.md) | Comprehensive analysis of mechanics, strategy, and AI research |
+| [AI/ML Research Survey](docs/AI_ML_RESEARCH.md) | Academic papers on AI/ML in Slay the Spire |
+| [Quantizing Economics](docs/QUANTIZING_ECONOMICS.md) | Quantum economics and decision theory |
+| [Glossary](docs/GLOSSARY.md) | Unified glossary for all topics |
+| [Decision Tools](tools/README.md) | Prototype decision-support tools |
 
 ---
 
@@ -180,6 +201,76 @@ The implementation addresses the following gaps from the specification:
 - **G6 (Output integrity)**: Per-batch Parquet files with atomic merge
 - **G7 (Statistical calibration)**: Validation harness with reservoir sampling
 - **G8 (Decision search depth)**: Card value evaluation with limited lookahead
+
+---
+
+## 🧠 Research & Decision-Support Tools
+
+This repository includes comprehensive research documentation and prototype decision-support tools based on academic papers and expert strategy analysis.
+
+### Research Documentation
+
+- **[STS Strategy & Research](docs/STS_STRATEGY_RESEARCH.md)**: Deep dive into game mechanics, strategic archetypes, procedural generation, and the Ascension system
+- **[AI/ML Research Survey](docs/AI_ML_RESEARCH.md)**: Comprehensive survey of academic papers including:
+  - Neural network path prediction (Malmö University)
+  - Entropy and risk analysis (arXiv 2025)
+  - Luck vs. skill quantification (IEEE COG 2023)
+  - Reinforcement learning applications
+- **[Quantizing Economics](docs/QUANTIZING_ECONOMICS.md)**: Application of quantum mechanics concepts to economics and decision theory
+  - Quantum Decision Theory (QDT)
+  - Superposition, entanglement, and measurement effects
+  - Applications to strategic decision-making
+- **[Glossary](docs/GLOSSARY.md)**: Unified glossary covering both quantum economics and STS terminology
+
+### Decision-Support Tools
+
+Located in `tools/` directory:
+
+#### Synergy Analyzer (`synergy_analyzer.py`)
+
+Analyzes card and relic synergies to inform deck-building decisions:
+
+```bash
+python tools/synergy_analyzer.py
+```
+
+Features:
+- Identifies active synergies (Strength scaling, Poison, Shivs, Orbs, etc.)
+- Calculates synergy scores
+- Recommends best cards to add
+- Provides strategic deck-building advice
+
+#### Path Optimizer (`path_optimizer.py`)
+
+Recommends optimal map paths using entropy-based heuristics from research:
+
+```bash
+python tools/path_optimizer.py
+```
+
+Features:
+- Evaluates path quality using Shannon entropy
+- Balances risk vs. reward based on game state
+- Estimates HP costs and expected value
+- Based on research showing higher-entropy paths correlate with winning
+
+See [tools/README.md](tools/README.md) for detailed documentation and usage examples.
+
+### Key Research Findings
+
+1. **Higher-Entropy Paths Win**: Research shows winning players take riskier, more diverse paths
+2. **Elite Fights Critical**: 2-3 elites per act optimal for relic acquisition despite HP risk
+3. **Skill Dominates Luck**: Top players achieve 70-90% win rates through adaptation
+4. **Quantum Parallels**: Decision-making under uncertainty in STS mirrors quantum economic principles
+
+### Research References
+
+- [Using machine learning to help find paths through the map in Slay the Spire](https://www.diva-portal.org/smash/get/diva2:1565751/FULLTEXT02.pdf)
+- [Analysis of Uncertainty in Procedural Maps in Slay the Spire (arXiv)](https://arxiv.org/html/2504.03918v1)
+- [Are You Lucky or Skilled? (IEEE COG 2023)](https://aeau.github.io/assets/papers/2023/andersson2023-cog03.pdf)
+- [Slay the Spire: Metrics Driven Design and Balance (GDC Vault)](https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics)
+- [Quantum Economics by David Orrell](https://books.google.com/books/about/Quantum_Economics.html?id=9YlZDwAAQBAJ)
+- [Quantum propensity in economics (arXiv)](https://arxiv.org/pdf/2103.10938)
 
 ---
 
