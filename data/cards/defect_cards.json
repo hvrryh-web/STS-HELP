@@ -1,0 +1,600 @@
+{
+  "$schema": "./card_schema.json",
+  "character": "Defect",
+  "starter_cards": [
+    {
+      "name": "Strike",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Basic",
+      "description": "Deal 6 damage.",
+      "effects": {"damage": 6}
+    },
+    {
+      "name": "Defend",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Basic",
+      "description": "Gain 5 Block.",
+      "effects": {"block": 5}
+    },
+    {
+      "name": "Zap",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Basic",
+      "description": "Channel 1 Lightning.",
+      "effects": {"channel": "lightning"}
+    },
+    {
+      "name": "Dualcast",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Basic",
+      "description": "Evoke your next Orb twice.",
+      "effects": {"evoke": 2}
+    }
+  ],
+  "common_cards": [
+    {
+      "name": "Ball Lightning",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 7 damage. Channel 1 Lightning.",
+      "effects": {"damage": 7, "channel": "lightning"}
+    },
+    {
+      "name": "Barrage",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 4 damage for each channeled Orb.",
+      "effects": {"damage_per_orb": 4}
+    },
+    {
+      "name": "Beam Cell",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 3 damage. Apply 1 Vulnerable.",
+      "effects": {"damage": 3, "vulnerable": 1}
+    },
+    {
+      "name": "Charge Battery",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 7 Block. Next turn, gain 1 Energy.",
+      "effects": {"block": 7, "energy_next_turn": 1}
+    },
+    {
+      "name": "Claw",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 3 damage. Increase the damage of ALL Claw cards by 2 this combat.",
+      "effects": {"damage": 3, "claw_bonus": true}
+    },
+    {
+      "name": "Cold Snap",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 6 damage. Channel 1 Frost.",
+      "effects": {"damage": 6, "channel": "frost"}
+    },
+    {
+      "name": "Compile Driver",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 7 damage. Draw 1 card for each unique Orb you have.",
+      "effects": {"damage": 7, "draw_per_orb_type": true}
+    },
+    {
+      "name": "Coolheaded",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Channel 1 Frost. Draw 1 card.",
+      "effects": {"channel": "frost", "draw": 1}
+    },
+    {
+      "name": "Go for the Eyes",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 3 damage. If the enemy intends to attack, apply 1 Weak.",
+      "effects": {"damage": 3, "weak_if_attack": 1}
+    },
+    {
+      "name": "Hologram",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 3 Block. Put a card from your discard pile into your hand.",
+      "effects": {"block": 3, "retrieve_discard": true}
+    },
+    {
+      "name": "Leap",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 9 Block.",
+      "effects": {"block": 9}
+    },
+    {
+      "name": "Rebound",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 9 damage. The next card you play this turn is placed on top of your draw pile.",
+      "effects": {"damage": 9, "next_card_on_draw": true}
+    },
+    {
+      "name": "Recursion",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Evoke your next Orb. Channel that same Orb.",
+      "effects": {"evoke": 1, "channel_evoked": true}
+    },
+    {
+      "name": "Stack",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain Block equal to the number of cards in your discard pile.",
+      "effects": {"block_equals_discard": true}
+    },
+    {
+      "name": "Steam Barrier",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 6 Block. Decrease this card's Block by 1 this combat.",
+      "effects": {"block": 6, "block_decrease_per_play": 1}
+    },
+    {
+      "name": "Streamline",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 15 damage. Reduce this card's cost by 1 this combat.",
+      "effects": {"damage": 15, "cost_reduction_per_play": 1}
+    },
+    {
+      "name": "Sweeping Beam",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 6 damage to ALL enemies. Draw 1 card.",
+      "effects": {"damage": 6, "target": "all", "draw": 1}
+    }
+  ],
+  "uncommon_cards": [
+    {
+      "name": "Aggregate",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 1 Energy for every 4 cards in your draw pile.",
+      "effects": {"energy_per_draw_pile_cards": 4}
+    },
+    {
+      "name": "Auto-Shields",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "If you have no Block, gain 11 Block.",
+      "effects": {"block_if_none": 11}
+    },
+    {
+      "name": "Blizzard",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 2 damage for each Frost channeled this combat.",
+      "effects": {"damage_per_frost_channeled": 2}
+    },
+    {
+      "name": "Boot Sequence",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "innate": true,
+      "exhaust": true,
+      "description": "Innate. Gain 10 Block. Exhaust.",
+      "effects": {"block": 10}
+    },
+    {
+      "name": "Bullseye",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 8 damage. Apply 2 Lock-On.",
+      "effects": {"damage": 8, "lock_on": 2}
+    },
+    {
+      "name": "Capacitor",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Gain 2 Orb slots.",
+      "effects": {"orb_slots": 2}
+    },
+    {
+      "name": "Chaos",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Channel 1 random Orb.",
+      "effects": {"channel": "random"}
+    },
+    {
+      "name": "Chill",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Channel 1 Frost for each enemy.",
+      "effects": {"channel_frost_per_enemy": true}
+    },
+    {
+      "name": "Consume",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 2 Focus. Lose 1 Orb slot.",
+      "effects": {"focus": 2, "orb_slot_loss": 1}
+    },
+    {
+      "name": "Darkness",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Channel 1 Dark. All Dark Orbs gain 6 power.",
+      "effects": {"channel": "dark", "dark_power_boost": 6}
+    },
+    {
+      "name": "Defragment",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Gain 1 Focus.",
+      "effects": {"focus": 1}
+    },
+    {
+      "name": "Doom and Gloom",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 10 damage to ALL enemies. Channel 1 Dark.",
+      "effects": {"damage": 10, "target": "all", "channel": "dark"}
+    },
+    {
+      "name": "Double Energy",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Double your Energy. Exhaust.",
+      "effects": {"double_energy": true}
+    },
+    {
+      "name": "Equilibrium",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 13 Block. Retain your hand this turn.",
+      "effects": {"block": 13, "retain_hand": true}
+    },
+    {
+      "name": "Force Field",
+      "cost": 4,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Costs 1 less for each Power you've played this combat. Gain 12 Block.",
+      "effects": {"block": 12, "cost_reduction_per_power": 1}
+    },
+    {
+      "name": "FTL",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 5 damage. If you have played fewer than 3 cards this turn, draw 1 card.",
+      "effects": {"damage": 5, "draw_if_few_cards": 1}
+    },
+    {
+      "name": "Fusion",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Channel 1 Plasma.",
+      "effects": {"channel": "plasma"}
+    },
+    {
+      "name": "Genetic Algorithm",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Gain 1 Block. Permanently increase this card's Block by 2. Exhaust.",
+      "effects": {"block": 1, "block_permanent_increase": 2}
+    },
+    {
+      "name": "Glacier",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 7 Block. Channel 2 Frost.",
+      "effects": {"block": 7, "channel_frost": 2}
+    },
+    {
+      "name": "Heatsinks",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Whenever you play a Power card, draw 1 card.",
+      "effects": {"draw_on_power": 1}
+    },
+    {
+      "name": "Hello World",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the start of your turn, add a random Common card to your hand.",
+      "effects": {"add_common_per_turn": true}
+    },
+    {
+      "name": "Loop",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the start of your turn, trigger the passive ability of your next Orb.",
+      "effects": {"extra_passive_trigger": 1}
+    },
+    {
+      "name": "Melter",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Remove ALL of an enemy's Block. Deal 10 damage.",
+      "effects": {"remove_block": true, "damage": 10}
+    },
+    {
+      "name": "Overclock",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Draw 2 cards. Add a Burn to your discard pile.",
+      "effects": {"draw": 2, "add_burn": true}
+    },
+    {
+      "name": "Reprogram",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Lose 1 Focus. Gain 1 Strength. Gain 1 Dexterity.",
+      "effects": {"focus": -1, "strength": 1, "dexterity": 1}
+    },
+    {
+      "name": "Rip and Tear",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 7 damage to a random enemy twice.",
+      "effects": {"damage": 7, "hits": 2, "target": "random"}
+    },
+    {
+      "name": "Scrape",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 7 damage. Draw 4 cards. Discard all cards drawn that cost more than 0.",
+      "effects": {"damage": 7, "draw": 4, "discard_drawn_if_cost_gt_zero": true}
+    },
+    {
+      "name": "Self Repair",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the end of combat, heal 7 HP.",
+      "effects": {"heal_end_combat": 7}
+    },
+    {
+      "name": "Skim",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Draw 3 cards.",
+      "effects": {"draw": 3}
+    },
+    {
+      "name": "Static Discharge",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Whenever you receive unblocked attack damage, channel 1 Lightning.",
+      "effects": {"channel_lightning_on_damage": true}
+    },
+    {
+      "name": "Storm",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Whenever you play a Power, channel 1 Lightning.",
+      "effects": {"channel_lightning_on_power": true}
+    },
+    {
+      "name": "Sunder",
+      "cost": 3,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 24 damage. If this kills the enemy, gain 3 Energy.",
+      "effects": {"damage": 24, "energy_on_kill": 3}
+    },
+    {
+      "name": "Tempest",
+      "cost": "X",
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Channel X+1 Lightning. Exhaust.",
+      "effects": {"channel_lightning_x_plus_1": true}
+    },
+    {
+      "name": "White Noise",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Add a random Power to your hand. It costs 0 this turn. Exhaust.",
+      "effects": {"add_random_power": true, "cost_zero_this_turn": true}
+    }
+  ],
+  "rare_cards": [
+    {
+      "name": "All For One",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 10 damage. Put all cost 0 cards from your discard pile into your hand.",
+      "effects": {"damage": 10, "retrieve_zero_cost": true}
+    },
+    {
+      "name": "Amplify",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "This turn, your next Power is played twice.",
+      "effects": {"next_power_twice": true}
+    },
+    {
+      "name": "Biased Cognition",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Gain 4 Focus. At the start of your turn, lose 1 Focus.",
+      "effects": {"focus": 4, "focus_loss_per_turn": 1}
+    },
+    {
+      "name": "Buffer",
+      "cost": 2,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Prevent the next time you would lose HP.",
+      "effects": {"buffer": 1}
+    },
+    {
+      "name": "Core Surge",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Deal 11 damage. Gain 1 Artifact. Exhaust.",
+      "effects": {"damage": 11, "artifact": 1}
+    },
+    {
+      "name": "Creative AI",
+      "cost": 3,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "At the start of your turn, add a random Power to your hand.",
+      "effects": {"add_power_per_turn": true}
+    },
+    {
+      "name": "Echo Form",
+      "cost": 3,
+      "type": "Power",
+      "rarity": "Rare",
+      "ethereal": true,
+      "description": "Ethereal. The first card you play each turn is played twice.",
+      "effects": {"first_card_twice": true}
+    },
+    {
+      "name": "Electrodynamics",
+      "cost": 2,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Lightning now hits ALL enemies. Channel 2 Lightning.",
+      "effects": {"lightning_aoe": true, "channel_lightning": 2}
+    },
+    {
+      "name": "Fission",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Remove all Orbs. Gain 1 Energy and draw 1 card for each Orb removed. Exhaust.",
+      "effects": {"remove_all_orbs": true, "energy_per_orb": 1, "draw_per_orb": 1}
+    },
+    {
+      "name": "Hyperbeam",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 26 damage to ALL enemies. Lose 3 Focus.",
+      "effects": {"damage": 26, "target": "all", "focus": -3}
+    },
+    {
+      "name": "Machine Learning",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "At the start of your turn, draw 1 additional card.",
+      "effects": {"draw_per_turn": 1}
+    },
+    {
+      "name": "Meteor Strike",
+      "cost": 5,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 24 damage. Channel 3 Plasma.",
+      "effects": {"damage": 24, "channel_plasma": 3}
+    },
+    {
+      "name": "Multi-Cast",
+      "cost": "X",
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "Evoke your next Orb X times.",
+      "effects": {"evoke_x": true}
+    },
+    {
+      "name": "Rainbow",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Channel 1 Lightning, 1 Frost, 1 Dark. Exhaust.",
+      "effects": {"channel_lightning": 1, "channel_frost": 1, "channel_dark": 1}
+    },
+    {
+      "name": "Reboot",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Shuffle ALL cards from your hand and discard pile into your draw pile. Draw 4 cards. Exhaust.",
+      "effects": {"shuffle_all": true, "draw": 4}
+    },
+    {
+      "name": "Seek",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Put 1 card from your draw pile into your hand. Exhaust.",
+      "effects": {"search_draw_pile": 1}
+    },
+    {
+      "name": "Thunder Strike",
+      "cost": 3,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 7 damage for each Lightning channeled this combat.",
+      "effects": {"damage_per_lightning_channeled": 7}
+    }
+  ]
+}

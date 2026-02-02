@@ -368,7 +368,12 @@ def apply_debuff(
 
 def process_poison_tick(enemy: EnemyState) -> int:
     """
-    Process poison damage at end of enemy turn.
+    Process poison damage at start of enemy turn.
+    
+    Note: In the actual game, poison triggers at the START of the
+    poisoned creature's turn, not the end. The enemy takes damage
+    equal to poison stacks, then poison decrements by 1.
+    Poison bypasses block.
     
     Args:
         enemy: Enemy state.

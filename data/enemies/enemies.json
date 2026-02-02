@@ -1,0 +1,363 @@
+{
+  "act1_enemies": {
+    "common": [
+      {
+        "name": "Cultist",
+        "hp": {"min": 48, "max": 54},
+        "pattern": ["incantation", "attack"],
+        "abilities": {
+          "incantation": {"type": "buff", "description": "Gain 3 Ritual (Strength)", "ritual": 3},
+          "attack": {"type": "attack", "damage": 6}
+        }
+      },
+      {
+        "name": "Jaw Worm",
+        "hp": {"min": 40, "max": 44},
+        "pattern": ["chomp", "thrash_or_bellow"],
+        "abilities": {
+          "chomp": {"type": "attack", "damage": 11},
+          "thrash": {"type": "attack_defend", "damage": 7, "block": 5},
+          "bellow": {"type": "buff", "strength": 3, "block": 6}
+        }
+      },
+      {
+        "name": "Louse",
+        "hp": {"min": 10, "max": 15},
+        "variants": ["Red Louse", "Green Louse"],
+        "pattern": ["bite"],
+        "abilities": {
+          "bite": {"type": "attack", "damage": {"min": 5, "max": 7}},
+          "grow": {"type": "buff", "strength": 3}
+        }
+      },
+      {
+        "name": "Slime",
+        "variants": ["Acid Slime (S)", "Acid Slime (M)", "Acid Slime (L)", "Spike Slime (S)", "Spike Slime (M)", "Spike Slime (L)"],
+        "split_mechanic": "Large slimes split into 2 medium at 50% HP"
+      },
+      {
+        "name": "Fungi Beast",
+        "hp": {"min": 22, "max": 28},
+        "pattern": ["bite", "grow"],
+        "abilities": {
+          "bite": {"type": "attack", "damage": 6},
+          "grow": {"type": "buff", "strength": 3}
+        }
+      },
+      {
+        "name": "Blue Slaver",
+        "hp": {"min": 46, "max": 50},
+        "abilities": {
+          "stab": {"type": "attack", "damage": 12},
+          "rake": {"type": "attack_debuff", "damage": 7, "weak": 1}
+        }
+      },
+      {
+        "name": "Red Slaver",
+        "hp": {"min": 46, "max": 50},
+        "abilities": {
+          "stab": {"type": "attack", "damage": 13},
+          "scrape": {"type": "attack_debuff", "damage": 8, "vulnerable": 1},
+          "entangle": {"type": "debuff", "effect": "Cannot play attacks"}
+        }
+      },
+      {
+        "name": "Looter",
+        "hp": {"min": 44, "max": 48},
+        "abilities": {
+          "mug": {"type": "attack", "damage": 10, "steals_gold": 15},
+          "lunge": {"type": "attack", "damage": 12},
+          "smoke_bomb": {"type": "escape", "escapes_after_2_turns": true}
+        }
+      }
+    ],
+    "elites": [
+      {
+        "name": "Gremlin Nob",
+        "hp": {"min": 82, "max": 86, "ascension_8_plus": {"min": 85, "max": 90}},
+        "pattern": "Attack focused, gains strength when player plays skills",
+        "abilities": {
+          "rush": {"type": "attack", "damage": 14},
+          "bellow": {"type": "buff", "strength": 2, "description": "First turn buff"},
+          "skull_bash": {"type": "attack_debuff", "damage": 6, "vulnerable": 2}
+        },
+        "passive": "Whenever you play a Skill, this enemy gains 2 Strength"
+      },
+      {
+        "name": "Lagavulin",
+        "hp": {"min": 108, "max": 112, "ascension_8_plus": 112},
+        "pattern": "Sleeps for 3 turns, then attacks with debuffs",
+        "abilities": {
+          "attack": {"type": "attack", "damage": 18},
+          "siphon_soul": {"type": "debuff", "dexterity_loss": 1, "strength_loss": 1}
+        },
+        "passive": "Starts asleep with 8 Metallicize. Wakes after 3 turns or taking damage."
+      },
+      {
+        "name": "Sentries",
+        "hp": {"min": 40, "max": 44, "ascension_8_plus": 44},
+        "count": 3,
+        "pattern": "Alternate between attack and daze generation",
+        "abilities": {
+          "bolt": {"type": "attack", "damage": 9},
+          "beam": {"type": "status", "adds_daze": 2}
+        }
+      }
+    ],
+    "boss": [
+      {
+        "name": "Slime Boss",
+        "hp": {"base": 140, "ascension_9_plus": 150},
+        "pattern": "Slam, prepare, slam pattern with split",
+        "abilities": {
+          "slam": {"type": "attack", "damage": 35},
+          "prepare": {"type": "intent", "telegraphs_slam": true},
+          "goop_spray": {"type": "status", "adds_slimed": 3}
+        },
+        "split_mechanic": "At 50% HP or lower, splits into 2 large slimes with 65 HP each"
+      },
+      {
+        "name": "The Guardian",
+        "hp": {"base": 240, "ascension_9_plus": 250},
+        "pattern": "Cycles between offensive and defensive modes",
+        "abilities": {
+          "twin_slam": {"type": "attack", "damage": 8, "hits": 2},
+          "whirlwind": {"type": "attack", "damage": 5, "hits": 4},
+          "fierce_bash": {"type": "attack", "damage": 32},
+          "vent_steam": {"type": "debuff", "weak": 2, "vulnerable": 2},
+          "charge_up": {"type": "buff", "block": 9},
+          "roll_attack": {"type": "attack", "damage": 9}
+        },
+        "mode_shift": "At 0 HP in defense mode, regains HP and shifts to offense"
+      },
+      {
+        "name": "Hexaghost",
+        "hp": {"base": 250, "ascension_9_plus": 264},
+        "pattern": "6-phase attack pattern with power scaling",
+        "abilities": {
+          "activate": {"type": "buff", "description": "Prepares for attacks"},
+          "divider": {"type": "attack", "damage": "6 + (MAX_HP / 12)", "hits": 6},
+          "inferno": {"type": "attack_debuff", "damage": 2, "hits": 6, "burn": 3},
+          "sear": {"type": "attack_status", "damage": 6, "burn": 1},
+          "tackle": {"type": "attack", "damage": {"min": 5, "max": 6}, "hits": 2}
+        }
+      }
+    ]
+  },
+  "act2_enemies": {
+    "common": [
+      {
+        "name": "Byrd",
+        "hp": {"min": 25, "max": 31},
+        "pattern": "Flying, harder to hit with single-target",
+        "abilities": {
+          "peck": {"type": "attack", "damage": 1, "hits": 5},
+          "fly": {"type": "buff", "flight": 3},
+          "swoop": {"type": "attack", "damage": 12}
+        }
+      },
+      {
+        "name": "Chosen",
+        "hp": {"min": 95, "max": 99},
+        "abilities": {
+          "poke": {"type": "attack", "damage": 5, "hits": 2},
+          "zap": {"type": "attack", "damage": 18},
+          "hex": {"type": "debuff", "vulnerable": 2, "adds_dazed": 1},
+          "drain": {"type": "attack_debuff", "damage": 18, "weak": 3}
+        }
+      },
+      {
+        "name": "Shelled Parasite",
+        "hp": {"min": 68, "max": 72},
+        "abilities": {
+          "double_strike": {"type": "attack", "damage": 6, "hits": 2},
+          "suck": {"type": "attack_heal", "damage": 10, "heal": 4},
+          "fell": {"type": "attack", "damage": 18}
+        },
+        "passive": "Takes 1 less damage from all sources (Plated Armor-like)"
+      },
+      {
+        "name": "Snake Plant",
+        "hp": {"min": 75, "max": 79},
+        "abilities": {
+          "chomp": {"type": "attack", "damage": 7, "hits": 3},
+          "enfeebling_spores": {"type": "debuff", "frail": 2, "weak": 2}
+        }
+      }
+    ],
+    "elites": [
+      {
+        "name": "Gremlin Leader",
+        "hp": 140,
+        "pattern": "Summons gremlins and buffs them",
+        "abilities": {
+          "rally": {"type": "summon_buff", "summons": 2, "strength_all": 3},
+          "encourage": {"type": "buff", "strength_all": 5, "block_all": 10}
+        }
+      },
+      {
+        "name": "Book of Stabbing",
+        "hp": {"min": 160, "max": 168},
+        "pattern": "Multi-stab attacks that scale",
+        "abilities": {
+          "multi_stab": {"type": "attack", "damage": 6, "hits": "increases each use"}
+        }
+      },
+      {
+        "name": "Slavers",
+        "hp_taskmaster": 64,
+        "hp_blue": 46,
+        "hp_red": 46,
+        "pattern": "Coordinated attacks and debuffs"
+      }
+    ],
+    "boss": [
+      {
+        "name": "Automaton",
+        "hp": 300,
+        "pattern": "Alternates between attack and defense phases",
+        "abilities": {
+          "flail": {"type": "attack", "damage": 7, "hits": 2},
+          "boost": {"type": "buff", "strength": 3},
+          "hyper_beam": {"type": "attack", "damage": 45}
+        }
+      },
+      {
+        "name": "Collector",
+        "hp": 282,
+        "pattern": "Summons minions and does buff attacks",
+        "abilities": {
+          "spawn": {"type": "summon", "count": 2, "hp": 25},
+          "buff": {"type": "buff", "strength": 3},
+          "mega_debuff": {"type": "debuff", "weak": 3, "vulnerable": 3, "frail": 3}
+        }
+      },
+      {
+        "name": "Champ",
+        "hp": 420,
+        "pattern": "Two phases - normal and enraged",
+        "abilities": {
+          "face_slap": {"type": "attack_debuff", "damage": 12, "frail": 2},
+          "heavy_slash": {"type": "attack", "damage": 16},
+          "gloat": {"type": "buff", "strength": 2},
+          "execute": {"type": "attack", "damage": "2x current HP"}
+        },
+        "enrage": "At 50% HP, clears debuffs and gains massive strength"
+      }
+    ]
+  },
+  "act3_enemies": {
+    "common": [
+      {
+        "name": "Darklings",
+        "hp": {"min": 48, "max": 56},
+        "pattern": "Multiple enemies that revive each other",
+        "abilities": {
+          "nip": {"type": "attack", "damage": 8},
+          "chomp": {"type": "attack", "damage": 8, "hits": 2},
+          "harden": {"type": "buff", "block": 12}
+        },
+        "revival": "If one survives, revives dead Darklings with half HP"
+      },
+      {
+        "name": "Orb Walker",
+        "hp": {"min": 90, "max": 96},
+        "abilities": {
+          "laser": {"type": "attack", "damage": 11},
+          "claw": {"type": "attack_status", "damage": 15, "burn": 2}
+        }
+      },
+      {
+        "name": "Spiker",
+        "hp": {"min": 42, "max": 56},
+        "pattern": "Gains thorns each turn",
+        "abilities": {
+          "cut": {"type": "attack", "damage": 9},
+          "spike": {"type": "buff", "thorns": 2}
+        }
+      }
+    ],
+    "elites": [
+      {
+        "name": "Giant Head",
+        "hp": 500,
+        "pattern": "Slow but devastating",
+        "abilities": {
+          "count": {"type": "buff", "description": "Charges power"},
+          "glare": {"type": "debuff", "weak": 1},
+          "it_is_time": {"type": "attack", "damage": 30}
+        },
+        "slow": "Takes 25% less damage from attacks dealing 10+"
+      },
+      {
+        "name": "Nemesis",
+        "hp": 185,
+        "pattern": "Intangible phases",
+        "abilities": {
+          "debuff": {"type": "debuff", "burn": 3},
+          "attack": {"type": "attack_debuff", "damage": 45, "burn": 3},
+          "scythe": {"type": "attack", "damage": 6, "hits": 3}
+        },
+        "intangible": "Has Intangible on certain turns"
+      },
+      {
+        "name": "Reptomancer",
+        "hp": 180,
+        "pattern": "Summons daggers, buffs, attacks",
+        "abilities": {
+          "summon": {"type": "summon", "daggers": 2, "hp": 20},
+          "snake_strike": {"type": "attack", "damage": 16, "hits": 2},
+          "big_bite": {"type": "attack", "damage": 34}
+        }
+      }
+    ],
+    "boss": [
+      {
+        "name": "Awakened One",
+        "hp_phase1": 300,
+        "hp_phase2": 300,
+        "pattern": "Two phases - gains strength from powers",
+        "abilities": {
+          "slash": {"type": "attack", "damage": 20},
+          "soul_strike": {"type": "attack", "damage": 6, "hits": 4},
+          "dark_echo": {"type": "debuff", "void": 1}
+        },
+        "passive": "Gains 1 Strength whenever you play a Power"
+      },
+      {
+        "name": "Time Eater",
+        "hp": 456,
+        "pattern": "Punishes playing many cards",
+        "abilities": {
+          "reverberate": {"type": "attack", "damage": 7, "hits": 3},
+          "head_slam": {"type": "attack_debuff", "damage": 26, "draw_reduction": 1},
+          "haste": {"type": "buff", "clears_debuffs": true, "heal": "15%"}
+        },
+        "passive": "After 12 cards are played, ends your turn, clears debuffs, gains 2 Strength"
+      },
+      {
+        "name": "Donu and Deca",
+        "hp_donu": 250,
+        "hp_deca": 250,
+        "pattern": "Buff each other, coordinated attacks",
+        "abilities": {
+          "donu_beam": {"type": "attack", "damage": 10, "hits": 2},
+          "donu_circle_of_power": {"type": "buff", "strength_both": 3},
+          "deca_square_of_protection": {"type": "buff", "block_both": 16}
+        }
+      }
+    ]
+  },
+  "act4_boss": {
+    "name": "The Heart",
+    "hp": 800,
+    "pattern": "Multi-phase devastating attacks",
+    "invincibility": "First turn: gain 200 Invincible",
+    "abilities": {
+      "blood_shots": {"type": "attack", "damage": 2, "hits": 15},
+      "echo": {"type": "attack_status", "damage": 40, "void": 2},
+      "buff": {"type": "buff", "strength": 2, "description": "Every 5 cards, gains 2 strength"}
+    },
+    "beat_of_death": "Deals 2 damage to player whenever a card is played"
+  }
+}
