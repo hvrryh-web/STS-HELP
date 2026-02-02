@@ -16,6 +16,23 @@ from engine_common import (
     create_starter_deck, get_playable_cards
 )
 
+# =========================================================================
+# EVALUATION CONSTANTS
+# Configurable parameters for card evaluation heuristics
+# =========================================================================
+
+# Average enemy attack damage used for estimating weak value
+AVG_ENEMY_ATTACK_DAMAGE = 10
+
+# Weak reduces incoming damage by this fraction
+WEAK_DAMAGE_REDUCTION = 0.25
+
+# Poison value multiplier (applied after triangular sum calculation)
+POISON_VALUE_MULTIPLIER = 0.9
+
+# HP divisor for estimating remaining turns
+TURNS_PER_HP_DIVISOR = 15
+
 
 # Silent-specific cards
 SILENT_CARDS = {
@@ -201,7 +218,7 @@ def evaluate_card_value(
         damage_with_new = new_total * (new_total + 1) / 2
         damage_without_new = current_poison * (current_poison + 1) / 2
         incremental_damage = damage_with_new - damage_without_new
-        value += min(incremental_damage, enemy.hp) * 0.9
+        value += min(incremental_damage, enemy.hp) * POISON_VALUE_MULTIPLIER
     
     # Double/Triple poison (Catalyst - triples when upgraded)
     if effects.get('double_poison') or effects.get('triple_poison'):
@@ -214,11 +231,11 @@ def evaluate_card_value(
             damage_new = new_poison * (new_poison + 1) / 2
             damage_old = current * (current + 1) / 2
             incremental = min(damage_new - damage_old, enemy.hp)
-            value += incremental * 0.9
+            value += incremental * POISON_VALUE_MULTIPLIER
     
     # Noxious Fumes (poison per turn)
     if 'poison_per_turn' in effects:
-        turns_remaining = max(1, enemy.hp // 15)  # Rough estimate
+        turns_remaining = max(1, enemy.hp // TURNS_PER_HP_DIVISOR)
         # Each turn adds poison_per_turn, which then deals damage
         # Over n turns: sum of (1 + 2 + ... + n*poison_per_turn) roughly
         ppt = effects['poison_per_turn']
@@ -238,10 +255,11 @@ def evaluate_card_value(
     
     # Weak
     if 'weak' in effects:
-        # Weak reduces incoming damage by 25% for duration
-        avg_enemy_attack = 10  # estimate
-        turns_remaining = max(1, enemy.hp // 15)
-        weak_value = effects['weak'] * avg_enemy_attack * 0.25 * min(effects['weak'], turns_remaining)
+        # Weak reduces incoming damage by WEAK_DAMAGE_REDUCTION for its duration
+        # Value = effective_turns * avg_damage * reduction_fraction
+        turns_remaining = max(1, enemy.hp // TURNS_PER_HP_DIVISOR)
+        effective_duration = min(effects['weak'], turns_remaining)
+        weak_value = effective_duration * AVG_ENEMY_ATTACK_DAMAGE * WEAK_DAMAGE_REDUCTION
         value += weak_value
     
     # Energy efficiency

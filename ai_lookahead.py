@@ -15,6 +15,26 @@ from engine_common import (
     apply_damage_to_enemy, apply_damage_to_player, get_playable_cards
 )
 
+# =========================================================================
+# EVALUATION CONSTANTS
+# Configurable parameters for card evaluation heuristics
+# =========================================================================
+
+# Block evaluation constants
+BLOCK_EFFECTIVE_MULTIPLIER = 1.5      # Value multiplier for block that prevents damage
+BLOCK_EXCESS_BASE_MULTIPLIER = 0.3    # Base multiplier for excess block value
+BLOCK_EXCESS_SCALING_CAP = 0.3        # Maximum additional scaling for excess block
+BLOCK_EXCESS_SCALING_PER_TURN = 0.05  # Scaling increase per remaining turn
+BLOCK_PROACTIVE_BASE = 0.4            # Base value for block when no attack incoming
+BLOCK_PROACTIVE_CAP = 0.2             # Maximum additional proactive block value
+BLOCK_PROACTIVE_PER_TURN = 0.03       # Proactive value increase per remaining turn
+
+# Combat estimation
+TURNS_PER_HP_DIVISOR = 15             # Divide enemy HP by this to estimate turns
+
+# Poison evaluation
+POISON_VALUE_MULTIPLIER = 0.9         # Value multiplier for poison damage
+
 
 class PlayStyle(Enum):
     """AI play style enumeration."""
@@ -161,19 +181,26 @@ class LookaheadAI:
                 
                 # Block is valuable up to the amount of incoming damage
                 effective_block = min(block_amount, max(0, total_incoming - player.block))
-                value += effective_block * 1.5 * weights['block']
+                value += effective_block * BLOCK_EFFECTIVE_MULTIPLIER * weights['block']
                 
                 # Extra block has value for future turns or multi-hit remaining
                 excess_block = block_amount - effective_block
                 # Higher value if combat will be long (enemy has high HP)
-                turns_remaining = max(1, enemy.hp // 15)
-                excess_multiplier = 0.3 + min(0.3, turns_remaining * 0.05)
+                turns_remaining = max(1, enemy.hp // TURNS_PER_HP_DIVISOR)
+                excess_multiplier = BLOCK_EXCESS_BASE_MULTIPLIER + min(
+                    BLOCK_EXCESS_SCALING_CAP, 
+                    turns_remaining * BLOCK_EXCESS_SCALING_PER_TURN
+                )
                 value += excess_block * excess_multiplier * weights['block']
             else:
                 # No attack incoming - block has reduced but non-zero value
                 # Proactive blocking for future turns
-                turns_remaining = max(1, enemy.hp // 15)
-                value += block_amount * (0.4 + min(0.2, turns_remaining * 0.03)) * weights['block']
+                turns_remaining = max(1, enemy.hp // TURNS_PER_HP_DIVISOR)
+                proactive_value = BLOCK_PROACTIVE_BASE + min(
+                    BLOCK_PROACTIVE_CAP,
+                    turns_remaining * BLOCK_PROACTIVE_PER_TURN
+                )
+                value += block_amount * proactive_value * weights['block']
         
         # === SCALING VALUE (LONG-TERM) ===
         
@@ -252,7 +279,7 @@ class LookaheadAI:
             incremental_damage = damage_with_new - damage_without_new
             # Cap at enemy remaining HP
             incremental_damage = min(incremental_damage, enemy.hp)
-            value += incremental_damage * 0.9
+            value += incremental_damage * POISON_VALUE_MULTIPLIER
         
         # Double/Triple poison (Catalyst)
         if effects.get('double_poison') or effects.get('triple_poison'):
@@ -265,7 +292,7 @@ class LookaheadAI:
                 damage_with_new = new_poison * (new_poison + 1) / 2
                 damage_without_mult = current_poison * (current_poison + 1) / 2
                 incremental = min(damage_with_new - damage_without_mult, enemy.hp)
-                value += incremental * 0.9
+                value += incremental * POISON_VALUE_MULTIPLIER
         
         # === CARD DRAW VALUE ===
         if 'draw' in effects:
