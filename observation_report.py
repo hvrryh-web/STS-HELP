@@ -8,7 +8,8 @@ Generates publication-grade observation reports including:
 - Comparison between scenarios
 - Known limitations and methodological notes
 
-Supports output in PDF, DOCX, and XLSX formats.
+Supports output in PDF, XLSX, and JSON formats.
+JSON output can be used for programmatic access or external document generation.
 """
 
 from dataclasses import dataclass
@@ -834,7 +835,7 @@ class ObservationReportGenerator:
             xlsx_path = self.output_dir / f"{base_name}.xlsx"
             outputs['xlsx'] = self.generate_xlsx_report(report, runs_df, str(xlsx_path))
         
-        # Save JSON for potential DOCX conversion
+        # Save JSON for programmatic access and external tools
         json_path = self.output_dir / f"{base_name}.json"
         with open(json_path, 'w') as f:
             json.dump({
