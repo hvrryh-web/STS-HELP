@@ -221,7 +221,7 @@ def create_provenance(config: Dict, data_dir: Path = None) -> ProvenanceInfo:
         ProvenanceInfo with all reproducibility metadata.
     """
     return ProvenanceInfo(
-        timestamp=datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+        timestamp=datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         git_commit=get_git_commit(),
         git_branch=get_git_branch(),
         git_dirty=is_git_dirty(),

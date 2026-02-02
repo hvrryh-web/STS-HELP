@@ -225,7 +225,7 @@ def run_simulation_batch(
     
     # Create metadata
     metadata = RunMetadata(
-        timestamp=datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+        timestamp=datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         config=config.to_dict(),
         character=character,
         batch_index=batch_index,
@@ -892,7 +892,7 @@ class TestSimulationIntegration:
         # Create exportable data structure
         export_data = {
             'version': '1.0',
-            'generated': datetime.now(timezone.utc).isoformat(),
+            'generated': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
             'metadata': metadata.to_dict(),
             'metrics': metrics.to_dict(),
             'raw_results': [
