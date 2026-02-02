@@ -1,0 +1,19 @@
+# Slay the Spire Simulation Environment
+# Requirements file for pip install
+
+# Core dependencies
+numpy>=1.24.0
+pandas>=2.0.0
+pyarrow>=14.0.0
+
+# Excel reporting
+openpyxl>=3.1.0
+xlsxwriter>=3.1.0
+
+# PDF reporting
+reportlab>=4.0.0
+matplotlib>=3.7.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
