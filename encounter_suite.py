@@ -13,7 +13,7 @@ This provides a more stable calibration surface than a single elite proxy.
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List, Dict, Callable, Optional, Tuple
+from typing import List, Dict, Callable, Optional, Tuple, Any
 import numpy as np
 
 from engine_common import EnemyState, Intent, PlayerState
@@ -391,7 +391,7 @@ def execute_enemy_intent(
     intent: EnemyIntent,
     enemy: EnemyState,
     player: PlayerState
-) -> Dict[str, any]:
+) -> Dict[str, Any]:
     """
     Execute an enemy's intent.
     

@@ -13,6 +13,14 @@ import numpy as np
 
 from seed_utils import make_child_generator
 
+# Optional scipy import for statistical functions
+try:
+    from scipy import stats as scipy_stats
+    HAS_SCIPY = True
+except ImportError:
+    HAS_SCIPY = False
+    scipy_stats = None
+
 
 @dataclass
 class PairedSimulationResult:
@@ -234,11 +242,12 @@ def compute_required_sample_size(
     Returns:
         Required number of paired samples.
     """
-    from scipy import stats
+    if not HAS_SCIPY:
+        raise ImportError("scipy is required for compute_required_sample_size")
     
     # Z-scores for alpha and power
-    z_alpha = stats.norm.ppf(1 - alpha / 2)
-    z_beta = stats.norm.ppf(power)
+    z_alpha = scipy_stats.norm.ppf(1 - alpha / 2)
+    z_beta = scipy_stats.norm.ppf(power)
     
     # Sample size formula for paired t-test
     n = ((z_alpha + z_beta) ** 2 * variance) / (effect_size ** 2)
@@ -313,8 +322,11 @@ class ActionEvaluator:
         sem = np.std(values_arr) / np.sqrt(n_pairs)
         
         # Compute confidence interval
-        from scipy import stats
-        t_crit = stats.t.ppf((1 + confidence) / 2, n_pairs - 1)
+        if HAS_SCIPY:
+            t_crit = scipy_stats.t.ppf((1 + confidence) / 2, n_pairs - 1)
+        else:
+            # Fallback to z-score approximation for large samples
+            t_crit = 1.96 if confidence == 0.95 else 2.576  # Approximate for 95%/99%
         ci = (mean - t_crit * sem, mean + t_crit * sem)
         
         return float(mean), (float(ci[0]), float(ci[1]))
