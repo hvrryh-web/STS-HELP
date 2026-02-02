@@ -99,6 +99,7 @@ class PlayerState:
     dexterity: int = 0
     artifact: int = 0
     poison: int = 0
+    frail: int = 0  # Frail debuff: block from cards is 25% less effective
     orbs: List[str] = field(default_factory=list)
     orb_slots: int = 3
     stance: str = "neutral"
@@ -122,6 +123,7 @@ class EnemyState:
         artifact: Artifact stacks.
         intent: Current intent.
         intent_value: Value associated with intent (e.g., damage amount).
+        intent_hits: Number of hits for multi-hit attacks.
     """
     name: str = "Enemy"
     hp: int = 100
@@ -134,6 +136,7 @@ class EnemyState:
     artifact: int = 0
     intent: Intent = Intent.ATTACK
     intent_value: int = 10
+    intent_hits: int = 1  # For multi-hit attacks like 3x5
 
 
 @dataclass
@@ -395,6 +398,35 @@ def decrement_debuffs(enemy: EnemyState) -> None:
         enemy.vulnerable -= 1
     if enemy.weak > 0:
         enemy.weak -= 1
+
+
+def decrement_player_debuffs(player: PlayerState) -> None:
+    """Decrement player debuff stacks at end of turn."""
+    if player.frail > 0:
+        player.frail -= 1
+
+
+def apply_block_to_player(player: PlayerState, base_block: int) -> int:
+    """
+    Apply block to player, accounting for frail and dexterity.
+    
+    Args:
+        player: Player state.
+        base_block: Base block amount from card.
+    
+    Returns:
+        Actual block gained.
+    """
+    block_amount = base_block + player.dexterity
+    
+    # Frail reduces block by 25%
+    if player.frail > 0:
+        block_amount = int(block_amount * 0.75)
+    
+    # Block cannot go below 0
+    block_amount = max(0, block_amount)
+    player.block += block_amount
+    return block_amount
 
 
 def create_starter_deck(character: str) -> List[Card]:

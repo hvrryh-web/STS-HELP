@@ -193,22 +193,37 @@ def evaluate_card_value(
         poison_amount = effects['poison']
         if 'hits' in effects:
             poison_amount *= effects['hits']
-        # Estimate turns to kill
-        remaining_hp = enemy.hp
-        turns_estimate = remaining_hp // (enemy.poison + poison_amount + 1) if enemy.poison + poison_amount > 0 else 10
-        # Total poison damage over remaining turns
-        poison_damage = sum(range(1, enemy.poison + poison_amount + 1))
-        value += min(poison_damage, remaining_hp) * 0.9
+        
+        # Calculate incremental poison damage using triangular number formula
+        current_poison = enemy.poison
+        new_total = current_poison + poison_amount
+        # Total damage from poison n = n*(n+1)/2 (triangular number)
+        damage_with_new = new_total * (new_total + 1) / 2
+        damage_without_new = current_poison * (current_poison + 1) / 2
+        incremental_damage = damage_with_new - damage_without_new
+        value += min(incremental_damage, enemy.hp) * 0.9
     
-    # Double poison (Catalyst)
-    if effects.get('double_poison'):
+    # Double/Triple poison (Catalyst - triples when upgraded)
+    if effects.get('double_poison') or effects.get('triple_poison'):
         if enemy.poison > 0:
-            value += enemy.poison * 3  # High value if poison is stacked
+            current = enemy.poison
+            # Catalyst doubles (or triples if upgraded)
+            multiplier = 3 if effects.get('triple_poison') else 2
+            new_poison = current * multiplier
+            # Calculate value of the multiplication
+            damage_new = new_poison * (new_poison + 1) / 2
+            damage_old = current * (current + 1) / 2
+            incremental = min(damage_new - damage_old, enemy.hp)
+            value += incremental * 0.9
     
     # Noxious Fumes (poison per turn)
     if 'poison_per_turn' in effects:
         turns_remaining = max(1, enemy.hp // 15)  # Rough estimate
-        value += effects['poison_per_turn'] * turns_remaining * 2
+        # Each turn adds poison_per_turn, which then deals damage
+        # Over n turns: sum of (1 + 2 + ... + n*poison_per_turn) roughly
+        ppt = effects['poison_per_turn']
+        total_fumes_damage = sum(i * ppt for i in range(1, turns_remaining + 1))
+        value += min(total_fumes_damage, enemy.hp) * 0.7
     
     # Draw value
     if 'draw' in effects:
@@ -217,11 +232,17 @@ def evaluate_card_value(
     # Shivs
     if 'add_shivs' in effects:
         shiv_damage = effects['add_shivs'] * (4 + player.strength)
+        if enemy.vulnerable > 0:
+            shiv_damage = int(shiv_damage * 1.5)
         value += shiv_damage * 0.7
     
     # Weak
     if 'weak' in effects:
-        value += effects['weak'] * 4
+        # Weak reduces incoming damage by 25% for duration
+        avg_enemy_attack = 10  # estimate
+        turns_remaining = max(1, enemy.hp // 15)
+        weak_value = effects['weak'] * avg_enemy_attack * 0.25 * min(effects['weak'], turns_remaining)
+        value += weak_value
     
     # Energy efficiency
     if card.cost > 0:

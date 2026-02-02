@@ -142,7 +142,12 @@ class LookaheadAI:
         
         # === BLOCK VALUE ===
         if 'block' in effects:
-            block_amount = effects['block'] + player.dexterity
+            base_block = effects['block']
+            # Apply dexterity bonus
+            block_amount = base_block + player.dexterity
+            # Apply frail penalty if player is frailed (25% less block)
+            if hasattr(player, 'frail') and player.frail > 0:
+                block_amount = int(block_amount * 0.75)
             
             # Value block based on enemy intent
             if enemy.intent.value == 'attack':
@@ -150,16 +155,25 @@ class LookaheadAI:
                 if enemy.weak > 0:
                     incoming = int(incoming * 0.75)
                 
+                # Check for multi-hit attacks (intent_hits attribute or pattern)
+                hits = getattr(enemy, 'intent_hits', 1)
+                total_incoming = incoming * hits
+                
                 # Block is valuable up to the amount of incoming damage
-                effective_block = min(block_amount, max(0, incoming - player.block))
+                effective_block = min(block_amount, max(0, total_incoming - player.block))
                 value += effective_block * 1.5 * weights['block']
                 
-                # Extra block beyond incoming damage has reduced value
+                # Extra block has value for future turns or multi-hit remaining
                 excess_block = block_amount - effective_block
-                value += excess_block * 0.3 * weights['block']
+                # Higher value if combat will be long (enemy has high HP)
+                turns_remaining = max(1, enemy.hp // 15)
+                excess_multiplier = 0.3 + min(0.3, turns_remaining * 0.05)
+                value += excess_block * excess_multiplier * weights['block']
             else:
                 # No attack incoming - block has reduced but non-zero value
-                value += block_amount * 0.4 * weights['block']
+                # Proactive blocking for future turns
+                turns_remaining = max(1, enemy.hp // 15)
+                value += block_amount * (0.4 + min(0.2, turns_remaining * 0.03)) * weights['block']
         
         # === SCALING VALUE (LONG-TERM) ===
         
@@ -227,11 +241,31 @@ class LookaheadAI:
         # Poison application
         if 'poison' in effects:
             poison_amount = effects['poison']
-            # Poison deals total damage = poison + (poison-1) + ... + 1 = poison*(poison+1)/2
-            # But that's over many turns. For immediate fights:
-            estimated_turns = max(3, enemy.hp // 15)
-            total_poison_damage = min(poison_amount * estimated_turns, poison_amount * (poison_amount + 1) / 2)
-            value += total_poison_damage * 0.8
+            # When applying new poison, total damage over the fight is:
+            # (current_poison + new_poison) * (current_poison + new_poison + 1) / 2
+            # But we only credit the incremental damage from NEW poison
+            current_poison = enemy.poison
+            new_total = current_poison + poison_amount
+            # Triangular number: sum from 1 to n = n*(n+1)/2
+            damage_with_new = new_total * (new_total + 1) / 2
+            damage_without_new = current_poison * (current_poison + 1) / 2
+            incremental_damage = damage_with_new - damage_without_new
+            # Cap at enemy remaining HP
+            incremental_damage = min(incremental_damage, enemy.hp)
+            value += incremental_damage * 0.9
+        
+        # Double/Triple poison (Catalyst)
+        if effects.get('double_poison') or effects.get('triple_poison'):
+            if enemy.poison > 0:
+                current_poison = enemy.poison
+                # Catalyst doubles (or triples if upgraded) current poison
+                multiplier = 3 if effects.get('triple_poison') else 2
+                new_poison = current_poison * multiplier
+                # Calculate incremental damage from the multiplication
+                damage_with_new = new_poison * (new_poison + 1) / 2
+                damage_without_mult = current_poison * (current_poison + 1) / 2
+                incremental = min(damage_with_new - damage_without_mult, enemy.hp)
+                value += incremental * 0.9
         
         # === CARD DRAW VALUE ===
         if 'draw' in effects:
