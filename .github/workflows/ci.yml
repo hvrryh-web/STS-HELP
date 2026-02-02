@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+# Limit GITHUB_TOKEN permissions for security
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest

@@ -363,7 +363,8 @@ def simulate_combat(
         # Divinity gives 3 energy, otherwise normal
         if player.stance == 'divinity':
             player.energy = player.max_energy + 3
-            enter_stance(player, 'neutral')  # Exit divinity at start
+            # Exit Divinity after granting bonus energy (per game rules)
+            enter_stance(player, 'neutral')
         else:
             player.energy = player.max_energy
         

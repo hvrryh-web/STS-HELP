@@ -505,12 +505,12 @@ def _create_defect_starter() -> List[Card]:
         card_type=CardType.SKILL,
         effects={'channel': 'lightning'}
     ))
-    # 1 Dualcast
+    # 1 Dualcast - evokes the rightmost orb twice
     deck.append(Card(
         name="Dualcast",
         cost=1,
         card_type=CardType.SKILL,
-        effects={'evoke': 2}
+        effects={'evoke': 2}  # Evoke count: triggers orb evoke effect this many times
     ))
     return deck
 
