@@ -564,6 +564,9 @@ def evaluate_card_reward(
     Returns:
         Dictionary mapping card name to evaluation results.
     """
+    # Local import to avoid circular dependency - ironclad_engine imports from engine_common
+    # which is also used by this module. This function is optional and only called when
+    # actually evaluating card rewards with the Ironclad engine.
     from ironclad_engine import simulate_combat
     
     results = {}

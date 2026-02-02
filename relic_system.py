@@ -548,11 +548,14 @@ class RelicManager:
         elif condition == 'first_attack':
             return context.get('first_attack', False)
         elif condition == 'attack_played':
-            return card is not None and card.card_type.value == 'attack'
+            from engine_common import CardType
+            return card is not None and card.card_type == CardType.ATTACK
         elif condition == 'power_played':
-            return card is not None and card.card_type.value == 'power'
+            from engine_common import CardType
+            return card is not None and card.card_type == CardType.POWER
         elif condition == 'skill_played':
-            return card is not None and card.card_type.value == 'skill'
+            from engine_common import CardType
+            return card is not None and card.card_type == CardType.SKILL
         elif condition == 'first_damage':
             return context.get('first_damage', False)
         elif condition == 'hp_below_50':
