@@ -78,6 +78,13 @@ tools/
 | [Glossary](docs/GLOSSARY.md) | Unified glossary for all topics |
 | [Decision Tools](tools/README.md) | Prototype decision-support tools |
 
+### System Reports
+
+| Document | Description |
+|----------|-------------|
+| [Design Gap CRIT Report](docs/DESIGN_GAP_CRIT_REPORT.md) | Original critical review of design gaps and opportunities |
+| [Modeling System CRIT Report](docs/MODELING_SYSTEM_CRIT_REPORT.md) | Analysis of modeling methods, prediction accuracy, and improvement plan |
+
 ---
 
 ## Installation
