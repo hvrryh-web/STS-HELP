@@ -1,0 +1,622 @@
+{
+  "$schema": "./card_schema.json",
+  "character": "Silent",
+  "starter_cards": [
+    {
+      "name": "Strike",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Basic",
+      "description": "Deal 6 damage.",
+      "effects": {"damage": 6}
+    },
+    {
+      "name": "Defend",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Basic",
+      "description": "Gain 5 Block.",
+      "effects": {"block": 5}
+    },
+    {
+      "name": "Survivor",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Basic",
+      "description": "Gain 8 Block. Discard 1 card.",
+      "effects": {"block": 8, "discard": 1}
+    },
+    {
+      "name": "Neutralize",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Basic",
+      "description": "Deal 3 damage. Apply 1 Weak.",
+      "effects": {"damage": 3, "weak": 1}
+    }
+  ],
+  "common_cards": [
+    {
+      "name": "Acrobatics",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Draw 3 cards. Discard 1 card.",
+      "effects": {"draw": 3, "discard": 1}
+    },
+    {
+      "name": "Backflip",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 5 Block. Draw 2 cards.",
+      "effects": {"block": 5, "draw": 2}
+    },
+    {
+      "name": "Blade Dance",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Add 3 Shivs to your hand.",
+      "effects": {"add_shivs": 3}
+    },
+    {
+      "name": "Cloak and Dagger",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 6 Block. Add 1 Shiv to your hand.",
+      "effects": {"block": 6, "add_shivs": 1}
+    },
+    {
+      "name": "Dagger Spray",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 4 damage to ALL enemies twice.",
+      "effects": {"damage": 4, "hits": 2, "target": "all"}
+    },
+    {
+      "name": "Dagger Throw",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 9 damage. Draw 1 card. Discard 1 card.",
+      "effects": {"damage": 9, "draw": 1, "discard": 1}
+    },
+    {
+      "name": "Deadly Poison",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Apply 5 Poison.",
+      "effects": {"poison": 5}
+    },
+    {
+      "name": "Deflect",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 4 Block.",
+      "effects": {"block": 4}
+    },
+    {
+      "name": "Dodge and Roll",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 4 Block. Next turn, gain 4 Block.",
+      "effects": {"block": 4, "block_next_turn": 4}
+    },
+    {
+      "name": "Flying Knee",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 8 damage. Next turn, gain 1 Energy.",
+      "effects": {"damage": 8, "energy_next_turn": 1}
+    },
+    {
+      "name": "Outmaneuver",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Next turn, gain 2 Energy.",
+      "effects": {"energy_next_turn": 2}
+    },
+    {
+      "name": "Piercing Wail",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "exhaust": true,
+      "description": "ALL enemies lose 6 Strength this turn. Exhaust.",
+      "effects": {"enemy_strength_loss_temp": 6, "target": "all"}
+    },
+    {
+      "name": "Poisoned Stab",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 6 damage. Apply 3 Poison.",
+      "effects": {"damage": 6, "poison": 3}
+    },
+    {
+      "name": "Prepared",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Draw 1 card. Discard 1 card.",
+      "effects": {"draw": 1, "discard": 1}
+    },
+    {
+      "name": "Quick Slash",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 8 damage. Draw 1 card.",
+      "effects": {"damage": 8, "draw": 1}
+    },
+    {
+      "name": "Slice",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 6 damage.",
+      "effects": {"damage": 6}
+    },
+    {
+      "name": "Sneaky Strike",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 12 damage. If you have discarded a card this turn, gain 2 Energy.",
+      "effects": {"damage": 12, "energy_if_discarded": 2}
+    },
+    {
+      "name": "Sucker Punch",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 7 damage. Apply 1 Weak.",
+      "effects": {"damage": 7, "weak": 1}
+    }
+  ],
+  "uncommon_cards": [
+    {
+      "name": "Accuracy",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Shivs deal 4 additional damage.",
+      "effects": {"shiv_damage_bonus": 4}
+    },
+    {
+      "name": "All-Out Attack",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 10 damage to ALL enemies. Discard 1 card at random.",
+      "effects": {"damage": 10, "target": "all", "discard_random": 1}
+    },
+    {
+      "name": "Backstab",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "innate": true,
+      "exhaust": true,
+      "description": "Innate. Deal 11 damage. Exhaust.",
+      "effects": {"damage": 11}
+    },
+    {
+      "name": "Blur",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 5 Block. Block is not removed at the start of your next turn.",
+      "effects": {"block": 5, "retain_block_one_turn": true}
+    },
+    {
+      "name": "Bouncing Flask",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Apply 3 Poison to a random enemy 3 times.",
+      "effects": {"poison": 3, "hits": 3, "target": "random"}
+    },
+    {
+      "name": "Calculated Gamble",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Discard your hand, then draw that many cards. Exhaust.",
+      "effects": {"discard_hand_draw_equal": true}
+    },
+    {
+      "name": "Catalyst",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Double an enemy's Poison. Exhaust.",
+      "effects": {"double_poison": true}
+    },
+    {
+      "name": "Choke",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 12 damage. Whenever you play a card this turn, the enemy loses 3 HP.",
+      "effects": {"damage": 12, "hp_loss_per_card": 3}
+    },
+    {
+      "name": "Concentrate",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Discard 3 cards. Gain 2 Energy.",
+      "effects": {"discard": 3, "energy": 2}
+    },
+    {
+      "name": "Crippling Cloud",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Apply 4 Poison and 2 Weak to ALL enemies. Exhaust.",
+      "effects": {"poison": 4, "weak": 2, "target": "all"}
+    },
+    {
+      "name": "Dash",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Gain 10 Block. Deal 10 damage.",
+      "effects": {"block": 10, "damage": 10}
+    },
+    {
+      "name": "Distraction",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Add a random Skill card to your hand. It costs 0 this turn. Exhaust.",
+      "effects": {"add_random_skill": true, "cost_zero_this_turn": true}
+    },
+    {
+      "name": "Endless Agony",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Whenever you draw this card, add a copy to your hand. Deal 4 damage. Exhaust.",
+      "effects": {"damage": 4, "copy_on_draw": true}
+    },
+    {
+      "name": "Escape Plan",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Draw 1 card. If it's a Skill, gain 3 Block.",
+      "effects": {"draw": 1, "block_if_skill": 3}
+    },
+    {
+      "name": "Eviscerate",
+      "cost": 3,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Costs 1 less for each card discarded this turn. Deal 7 damage 3 times.",
+      "effects": {"damage": 7, "hits": 3, "cost_reduction_per_discard": 1}
+    },
+    {
+      "name": "Expertise",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Draw cards until you have 6 cards in hand.",
+      "effects": {"draw_to_hand_size": 6}
+    },
+    {
+      "name": "Finisher",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 6 damage for each Attack played this turn.",
+      "effects": {"damage_per_attack_played": 6}
+    },
+    {
+      "name": "Flechettes",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 4 damage for each Skill in your hand.",
+      "effects": {"damage_per_skill_in_hand": 4}
+    },
+    {
+      "name": "Footwork",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Gain 2 Dexterity.",
+      "effects": {"dexterity": 2}
+    },
+    {
+      "name": "Heel Hook",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 5 damage. If the enemy is Weak, gain 1 Energy and draw 1 card.",
+      "effects": {"damage": 5, "if_weak_energy": 1, "if_weak_draw": 1}
+    },
+    {
+      "name": "Infinite Blades",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the start of your turn, add a Shiv to your hand.",
+      "effects": {"shiv_per_turn": 1}
+    },
+    {
+      "name": "Leg Sweep",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Apply 2 Weak. Gain 11 Block.",
+      "effects": {"weak": 2, "block": 11}
+    },
+    {
+      "name": "Masterful Stab",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Costs 1 more for each time you lose HP this combat. Deal 12 damage.",
+      "effects": {"damage": 12, "cost_increase_per_hp_loss": 1}
+    },
+    {
+      "name": "Noxious Fumes",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the start of your turn, apply 2 Poison to ALL enemies.",
+      "effects": {"poison_per_turn": 2, "target": "all"}
+    },
+    {
+      "name": "Predator",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 15 damage. Next turn, draw 2 additional cards.",
+      "effects": {"damage": 15, "draw_next_turn": 2}
+    },
+    {
+      "name": "Reflex",
+      "cost": -1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Unplayable. If this card is discarded from your hand, draw 2 cards.",
+      "effects": {"unplayable": true, "draw_on_discard": 2}
+    },
+    {
+      "name": "Riddle with Holes",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 3 damage 5 times.",
+      "effects": {"damage": 3, "hits": 5}
+    },
+    {
+      "name": "Setup",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Put a card from your hand onto the top of your draw pile. It costs 0 until played.",
+      "effects": {"put_on_draw": true, "cost_zero_until_played": true}
+    },
+    {
+      "name": "Skewer",
+      "cost": "X",
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 7 damage X times.",
+      "effects": {"damage": 7, "hits_x": true}
+    },
+    {
+      "name": "Tactician",
+      "cost": -1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Unplayable. If this card is discarded from your hand, gain 1 Energy.",
+      "effects": {"unplayable": true, "energy_on_discard": 1}
+    },
+    {
+      "name": "Terror",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Apply 99 Vulnerable. Exhaust.",
+      "effects": {"vulnerable": 99}
+    },
+    {
+      "name": "Well-Laid Plans",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the end of your turn, Retain up to 1 card.",
+      "effects": {"retain_cards": 1}
+    }
+  ],
+  "rare_cards": [
+    {
+      "name": "A Thousand Cuts",
+      "cost": 2,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Whenever you play a card, deal 1 damage to ALL enemies.",
+      "effects": {"damage_per_card_played": 1, "target": "all"}
+    },
+    {
+      "name": "Adrenaline",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Gain 1 Energy. Draw 2 cards. Exhaust.",
+      "effects": {"energy": 1, "draw": 2}
+    },
+    {
+      "name": "After Image",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Whenever you play a card, gain 1 Block.",
+      "effects": {"block_per_card_played": 1}
+    },
+    {
+      "name": "Alchemize",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Obtain a random potion. Exhaust.",
+      "effects": {"gain_random_potion": true}
+    },
+    {
+      "name": "Bullet Time",
+      "cost": 3,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "You cannot draw any more cards this turn. Reduce the cost of all cards in your hand to 0 this turn.",
+      "effects": {"no_draw": true, "all_cards_cost_zero": true}
+    },
+    {
+      "name": "Burst",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "This turn, your next Skill is played twice.",
+      "effects": {"next_skill_twice": true}
+    },
+    {
+      "name": "Corpse Explosion",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "Apply 6 Poison. When the enemy dies, deal damage equal to its Max HP to ALL enemies.",
+      "effects": {"poison": 6, "corpse_explode": true}
+    },
+    {
+      "name": "Die Die Die",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Deal 13 damage to ALL enemies. Exhaust.",
+      "effects": {"damage": 13, "target": "all"}
+    },
+    {
+      "name": "Doppelganger",
+      "cost": "X",
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Next turn, draw X cards and gain X Energy. Exhaust.",
+      "effects": {"draw_next_turn_x": true, "energy_next_turn_x": true}
+    },
+    {
+      "name": "Envenom",
+      "cost": 2,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Whenever an Attack deals unblocked damage, apply 1 Poison.",
+      "effects": {"poison_on_unblocked": 1}
+    },
+    {
+      "name": "Glass Knife",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 8 damage twice. Decrease this card's damage by 2 this combat.",
+      "effects": {"damage": 8, "hits": 2, "damage_decrease_per_play": 2}
+    },
+    {
+      "name": "Grand Finale",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Can only be played if there are no cards in your draw pile. Deal 50 damage to ALL enemies.",
+      "effects": {"damage": 50, "target": "all", "requires_empty_draw": true}
+    },
+    {
+      "name": "Malaise",
+      "cost": "X",
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Enemy loses X Strength. Apply X Weak. Exhaust.",
+      "effects": {"enemy_strength_loss_x": true, "weak_x": true}
+    },
+    {
+      "name": "Nightmare",
+      "cost": 3,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Choose a card in your hand. Next turn, add 3 copies of it into your hand. Exhaust.",
+      "effects": {"copy_card_next_turn": 3}
+    },
+    {
+      "name": "Phantasmal Killer",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "Next turn, deal double damage.",
+      "effects": {"double_damage_next_turn": true}
+    },
+    {
+      "name": "Storm of Steel",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "Discard your hand. Add 1 Shiv to your hand for each card discarded.",
+      "effects": {"discard_hand": true, "shiv_per_discard": true}
+    },
+    {
+      "name": "Tools of the Trade",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "At the start of your turn, draw 1 card and discard 1 card.",
+      "effects": {"draw_per_turn": 1, "discard_per_turn": 1}
+    },
+    {
+      "name": "Unload",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 14 damage. Discard all non-Attack cards in your hand.",
+      "effects": {"damage": 14, "discard_non_attacks": true}
+    },
+    {
+      "name": "Wraith Form",
+      "cost": 3,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Gain 2 Intangible. At the start of your turn, lose 1 Dexterity.",
+      "effects": {"intangible": 2, "dexterity_loss_per_turn": 1}
+    }
+  ],
+  "special_cards": [
+    {
+      "name": "Shiv",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Special",
+      "exhaust": true,
+      "description": "Deal 4 damage. Exhaust.",
+      "effects": {"damage": 4}
+    }
+  ]
+}

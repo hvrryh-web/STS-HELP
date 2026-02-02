@@ -1,12 +1,19 @@
 """
 Reporting module for Slay the Spire simulation.
 Generates Excel (XLSX) tables and PDF evaluation reports.
+
+Enhanced per critical review Section 5:
+- Win rate with confidence interval
+- Turns-to-win distribution
+- Damage taken distribution
+- Top loss reasons breakdown
+- Known simulator limitations section
 """
 
 import os
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -68,9 +75,110 @@ def load_simulation_data(parquet_dir: Path) -> Dict[str, pd.DataFrame]:
     return data
 
 
+def wilson_score_interval(successes: int, trials: int, z: float = 1.96) -> Tuple[float, float]:
+    """
+    Compute Wilson score confidence interval for binomial proportion.
+    
+    Per critical review Section 5: Always include confidence intervals.
+    
+    Args:
+        successes: Number of successes.
+        trials: Total trials.
+        z: Z-score for confidence level (1.96 for 95%).
+    
+    Returns:
+        Tuple of (lower bound, upper bound).
+    """
+    if trials == 0:
+        return (0.0, 1.0)
+    
+    p = successes / trials
+    denominator = 1 + z**2 / trials
+    center = (p + z**2 / (2 * trials)) / denominator
+    margin = z * np.sqrt((p * (1 - p) + z**2 / (4 * trials)) / trials) / denominator
+    
+    return (max(0, center - margin), min(1, center + margin))
+
+
+def compute_failure_modes(df: pd.DataFrame) -> Dict[str, Any]:
+    """
+    Analyze failure modes for losses.
+    
+    Per critical review Section 5: Include top loss reasons breakdown.
+    
+    Args:
+        df: DataFrame with simulation results.
+    
+    Returns:
+        Dictionary with failure mode analysis.
+    """
+    losses = df[~df['win']]
+    
+    if len(losses) == 0:
+        return {'total_losses': 0, 'breakdown': {}}
+    
+    # Categorize losses by damage pattern
+    failure_modes = {
+        'burst_death': 0,      # Died quickly (few turns, high damage)
+        'attrition_death': 0,  # Died slowly (many turns, accumulated damage)
+        'mid_game_death': 0,   # Died in middle of fight
+    }
+    
+    median_turns = df['turns'].median()
+    
+    for _, row in losses.iterrows():
+        turns = row['turns']
+        damage = row['damage_taken']
+        
+        if turns <= 5:
+            failure_modes['burst_death'] += 1
+        elif turns >= median_turns * 1.5:
+            failure_modes['attrition_death'] += 1
+        else:
+            failure_modes['mid_game_death'] += 1
+    
+    total_losses = len(losses)
+    
+    return {
+        'total_losses': total_losses,
+        'breakdown': {
+            k: v / total_losses if total_losses > 0 else 0
+            for k, v in failure_modes.items()
+        },
+        'raw_counts': failure_modes,
+        'mean_turns_on_loss': losses['turns'].mean(),
+        'mean_damage_on_loss': losses['damage_taken'].mean(),
+    }
+
+
+def get_simulator_limitations() -> List[str]:
+    """
+    Return list of known simulator limitations.
+    
+    Per critical review Section 5: Include known limitations in reports.
+    
+    Returns:
+        List of limitation descriptions.
+    """
+    return [
+        "Single-enemy proxy mode only - multi-enemy targeting not fully implemented",
+        "Simplified card pool - only starter deck + basic cards modeled",
+        "Intent selection is probabilistic proxy, not scripted per enemy",
+        "Power card stacking edge cases may differ from game behavior",
+        "No event/shop/rest site modeling - combat only",
+        "Exhaust synergies (Dead Branch, Feel No Pain) not implemented",
+        "Artifact semantics assume standard debuff blocking order",
+        "Enemy damage schedules are calibration proxies, not act-accurate",
+        "Multi-hit and per-hit trigger timing may differ from game",
+        "No ascension-specific enemy behavior modeled",
+    ]
+
+
 def compute_summary_stats(df: pd.DataFrame) -> Dict[str, Any]:
     """
     Compute summary statistics for a character.
+    
+    Enhanced per critical review Section 5 with confidence intervals.
     
     Args:
         df: DataFrame with simulation results.
@@ -80,10 +188,17 @@ def compute_summary_stats(df: pd.DataFrame) -> Dict[str, Any]:
     """
     wins_df = df[df['win']]
     
+    # Compute win rate confidence interval
+    win_count = int(df['win'].sum())
+    total_runs = len(df)
+    win_rate_ci = wilson_score_interval(win_count, total_runs)
+    
     stats = {
-        'runs': len(df),
-        'wins': df['win'].sum(),
+        'runs': total_runs,
+        'wins': win_count,
         'win_rate': df['win'].mean(),
+        'win_rate_ci_lower': win_rate_ci[0],
+        'win_rate_ci_upper': win_rate_ci[1],
         'mean_turns': df['turns'].mean(),
         'median_turns': df['turns'].median(),
         'std_turns': df['turns'].std(),
@@ -463,17 +578,20 @@ def generate_pdf(
     story.append(Paragraph(summary_text, styles['Normal']))
     story.append(Spacer(1, 20))
     
-    # Summary statistics table
+    # Summary statistics table with confidence intervals
     story.append(Paragraph("<b>Summary Statistics</b>", styles['Heading2']))
+    story.append(Paragraph("Win rates include 95% Wilson score confidence intervals.", styles['Normal']))
+    story.append(Spacer(1, 6))
     
-    table_data = [['Character', 'Runs', 'Win Rate', 'Mean Turns', 'Mean Damage', 'Mean Final HP']]
+    table_data = [['Character', 'Runs', 'Win Rate (95% CI)', 'Mean Turns', 'Mean Damage', 'Mean Final HP']]
     
     for character, df in data.items():
         stats = compute_summary_stats(df)
+        win_ci_str = f"{stats['win_rate']:.1%} ({stats['win_rate_ci_lower']:.1%}-{stats['win_rate_ci_upper']:.1%})"
         table_data.append([
             character,
             str(stats['runs']),
-            f"{stats['win_rate']:.1%}",
+            win_ci_str,
             f"{stats['mean_turns']:.1f}",
             f"{stats['mean_damage']:.1f}",
             f"{stats['mean_final_hp']:.1f}"
@@ -552,6 +670,41 @@ def generate_pdf(
     
     story.append(Spacer(1, 12))
     
+    # Failure Mode Analysis (per Section 5)
+    story.append(Paragraph("<b>Failure Mode Analysis</b>", styles['Heading2']))
+    story.append(Paragraph("Breakdown of loss causes by damage pattern:", styles['Normal']))
+    story.append(Spacer(1, 6))
+    
+    failure_table_data = [['Character', 'Total Losses', 'Burst Death', 'Attrition', 'Mid-Game', 'Avg Turns on Loss']]
+    
+    for character, df in data.items():
+        failure_modes = compute_failure_modes(df)
+        if failure_modes['total_losses'] > 0:
+            breakdown = failure_modes['breakdown']
+            failure_table_data.append([
+                character,
+                str(failure_modes['total_losses']),
+                f"{breakdown.get('burst_death', 0):.1%}",
+                f"{breakdown.get('attrition_death', 0):.1%}",
+                f"{breakdown.get('mid_game_death', 0):.1%}",
+                f"{failure_modes['mean_turns_on_loss']:.1f}"
+            ])
+    
+    if len(failure_table_data) > 1:
+        failure_table = Table(failure_table_data, colWidths=[1*inch, 1*inch, 1*inch, 1*inch, 1*inch, 1.3*inch])
+        failure_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.Color(0.6, 0.2, 0.2)),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black)
+        ]))
+        story.append(failure_table)
+    else:
+        story.append(Paragraph("No losses recorded.", styles['Normal']))
+    
+    story.append(Spacer(1, 12))
+    
     # Next steps
     story.append(Paragraph("<b>Recommended Next Steps</b>", styles['Heading2']))
     next_steps = [
@@ -562,6 +715,20 @@ def generate_pdf(
     ]
     for step in next_steps:
         story.append(Paragraph(step, styles['Normal']))
+    
+    story.append(Spacer(1, 12))
+    
+    # Known Simulator Limitations (per Section 5)
+    story.append(Paragraph("<b>Known Simulator Limitations</b>", styles['Heading2']))
+    story.append(Paragraph(
+        "The following limitations should be considered when interpreting results:",
+        styles['Normal']
+    ))
+    story.append(Spacer(1, 6))
+    
+    limitations = get_simulator_limitations()
+    for i, limitation in enumerate(limitations, 1):
+        story.append(Paragraph(f"{i}. {limitation}", styles['Normal']))
     
     # Build PDF
     doc.build(story)

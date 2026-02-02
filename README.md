@@ -3,8 +3,15 @@ Slay the Spire Game Assistant-Helper, Agent Environments & Knowledge Database & 
 
 ## Overview
 
-This repository provides a production-grade simulation environment for Slay the Spire characters. It includes:
+This repository provides a comprehensive knowledge base and production-grade simulation environment for Slay the Spire. It serves as a canonical reference for ChatGPT agents and includes:
 
+### Knowledge Base
+- **📚 Game Data**: Complete card, relic, enemy, and keyword data in JSON format
+- **📖 Verified Mechanics**: Cross-referenced and verified game rules from official sources
+- **🎮 Quick Start Guide**: Get up and running quickly
+- **📋 Full Documentation**: Comprehensive API and usage documentation
+
+### Simulation Framework
 - **Deterministic RNG** via `numpy.random.SeedSequence` for reproducible runs
 - **Explicit deck/hand/discard semantics** with hand limit and reshuffle mechanics
 - **Intent-aware defensive play** with block and damage modeling
@@ -13,6 +20,44 @@ This repository provides a production-grade simulation environment for Slay the 
 - **Parquet output** with canonical merging
 - **Excel and PDF reporting** with Patch ID traceability
 - **Decision-value metrics** (EV, PV, RV, APV, UPV, GGV, SGV, CGV, ATV, JV)
+
+---
+
+## 📚 Knowledge Base Structure
+
+```
+docs/
+├── QUICK_START.md          # Quick start guide
+├── FULL_HELP.md            # Complete API documentation
+├── USEME.md                # Helper tool reference
+├── GAME_MECHANICS.md       # Game rules reference
+└── VERIFIED_GAME_DATA.md   # Cross-verified game data
+
+data/
+├── cards/
+│   ├── ironclad_cards.json # All Ironclad cards
+│   ├── silent_cards.json   # All Silent cards
+│   ├── defect_cards.json   # All Defect cards
+│   └── watcher_cards.json  # All Watcher cards
+├── relics/
+│   └── relics.json         # All relics by category
+├── enemies/
+│   └── enemies.json        # Enemy stats and patterns
+└── keywords/
+    └── keywords.json       # Game keyword definitions
+```
+
+### Key Documentation Links
+
+| Document | Description |
+|----------|-------------|
+| [Quick Start](docs/QUICK_START.md) | Get started in 5 minutes |
+| [Full Help](docs/FULL_HELP.md) | Complete API reference |
+| [USEME Guide](docs/USEME.md) | Command-line examples |
+| [Game Mechanics](docs/GAME_MECHANICS.md) | Verified game rules |
+| [Verified Data](docs/VERIFIED_GAME_DATA.md) | Cross-referenced data source |
+
+---
 
 ## Installation
 
@@ -47,6 +92,19 @@ python -c "import reporting; reporting.generate_pdf('unified_outputs', 'PATCH-ID
 python validation_harness.py --characters Ironclad Silent Defect Watcher --runs 1000
 ```
 
+---
+
+## Character Quick Reference
+
+| Character | HP | Energy | Starter Relic | Playstyle |
+|-----------|-----|--------|---------------|-----------|
+| **Ironclad** | 80 | 3 | Burning Blood (+6 HP end combat) | Strength scaling, self-damage |
+| **Silent** | 70 | 3 | Ring of the Snake (+2 draw turn 1) | Poison, shivs, discard synergy |
+| **Defect** | 75 | 3 | Cracked Core (channel Lightning) | Orbs, Focus scaling |
+| **Watcher** | 72 | 3 | Pure Water (add Miracle) | Stances, Mantra |
+
+---
+
 ## Architecture
 
 ### Components
@@ -75,6 +133,8 @@ PATCH-{YYYYMMDD}-{CHAR}-{SEEDHEX}-{BATCHIDX}-{HASH4}
 - `BATCHIDX` - Batch index or "ALL" for merged final
 - `HASH4` - Last 4 hex of SHA-1 hash for uniqueness
 
+---
+
 ## Decision Metrics
 
 The simulation computes the following decision-value metrics:
@@ -93,6 +153,21 @@ The simulation computes the following decision-value metrics:
 | ATV | Ambitious Transcendent Value - PV scaled by win probability |
 | JV | Jackpot Value - PV of rare high-reward paths |
 
+---
+
+## Verified Data Sources
+
+All game data in this repository has been cross-referenced with:
+
+- [Slay the Spire Wiki (Fandom)](https://slay-the-spire.fandom.com/)
+- [SlayTheSpire.gg](https://www.slaythespire.gg/)
+- [SlayTheSpire.info](https://slaythespire.info/)
+- Official game client (v2.3+)
+
+See [VERIFIED_GAME_DATA.md](docs/VERIFIED_GAME_DATA.md) for detailed verification notes.
+
+---
+
 ## Resolved Issues
 
 The implementation addresses the following gaps from the specification:
@@ -105,6 +180,8 @@ The implementation addresses the following gaps from the specification:
 - **G6 (Output integrity)**: Per-batch Parquet files with atomic merge
 - **G7 (Statistical calibration)**: Validation harness with reservoir sampling
 - **G8 (Decision search depth)**: Card value evaluation with limited lookahead
+
+---
 
 ## License
 

@@ -1,0 +1,656 @@
+{
+  "$schema": "./card_schema.json",
+  "character": "Watcher",
+  "starter_cards": [
+    {
+      "name": "Strike",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Basic",
+      "description": "Deal 6 damage.",
+      "effects": {"damage": 6}
+    },
+    {
+      "name": "Defend",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Basic",
+      "description": "Gain 5 Block.",
+      "effects": {"block": 5}
+    },
+    {
+      "name": "Eruption",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Basic",
+      "description": "Deal 9 damage. Enter Wrath.",
+      "effects": {"damage": 9, "enter_stance": "wrath"}
+    },
+    {
+      "name": "Vigilance",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Basic",
+      "description": "Gain 8 Block. Enter Calm.",
+      "effects": {"block": 8, "enter_stance": "calm"}
+    }
+  ],
+  "common_cards": [
+    {
+      "name": "Bowling Bash",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 7 damage for each enemy in combat.",
+      "effects": {"damage_per_enemy": 7}
+    },
+    {
+      "name": "Consecrate",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 5 damage to ALL enemies.",
+      "effects": {"damage": 5, "target": "all"}
+    },
+    {
+      "name": "Crescendo",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "exhaust": true,
+      "description": "Retain. Enter Wrath. Exhaust.",
+      "effects": {"retain": true, "enter_stance": "wrath"}
+    },
+    {
+      "name": "Crush Joints",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 8 damage. If the last card played was a Skill, apply 1 Vulnerable.",
+      "effects": {"damage": 8, "vulnerable_if_skill": 1}
+    },
+    {
+      "name": "Cut Through Fate",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 7 damage. Scry 2. Draw 1 card.",
+      "effects": {"damage": 7, "scry": 2, "draw": 1}
+    },
+    {
+      "name": "Empty Body",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 7 Block. Exit your Stance.",
+      "effects": {"block": 7, "exit_stance": true}
+    },
+    {
+      "name": "Empty Fist",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 9 damage. Exit your Stance.",
+      "effects": {"damage": 9, "exit_stance": true}
+    },
+    {
+      "name": "Evaluate",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 6 Block. Shuffle an Insight into your draw pile.",
+      "effects": {"block": 6, "add_insight": true}
+    },
+    {
+      "name": "Flurry of Blows",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 4 damage. Whenever you change Stance, return this from the discard pile to your hand.",
+      "effects": {"damage": 4, "return_on_stance_change": true}
+    },
+    {
+      "name": "Flying Sleeves",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Retain. Deal 4 damage twice.",
+      "effects": {"retain": true, "damage": 4, "hits": 2}
+    },
+    {
+      "name": "Follow-Up",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 7 damage. If the last card played was an Attack, gain 1 Energy.",
+      "effects": {"damage": 7, "energy_if_attack": 1}
+    },
+    {
+      "name": "Halt",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 3 Block. If you are in Wrath, gain 9 additional Block.",
+      "effects": {"block": 3, "block_if_wrath": 9}
+    },
+    {
+      "name": "Just Lucky",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Scry 1. Gain 2 Block. Deal 3 damage.",
+      "effects": {"scry": 1, "block": 2, "damage": 3}
+    },
+    {
+      "name": "Pressure Points",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Apply 8 Mark. ALL enemies lose HP equal to their Mark.",
+      "effects": {"mark": 8, "trigger_mark": true}
+    },
+    {
+      "name": "Prostrate",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 4 Block. Gain 2 Mantra.",
+      "effects": {"block": 4, "mantra": 2}
+    },
+    {
+      "name": "Protect",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Retain. Gain 12 Block.",
+      "effects": {"retain": true, "block": 12}
+    },
+    {
+      "name": "Sash Whip",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "description": "Deal 8 damage. If the last card played was an Attack, apply 1 Weak.",
+      "effects": {"damage": 8, "weak_if_attack": 1}
+    },
+    {
+      "name": "Third Eye",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "description": "Gain 7 Block. Scry 3.",
+      "effects": {"block": 7, "scry": 3}
+    },
+    {
+      "name": "Tranquility",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "exhaust": true,
+      "description": "Retain. Enter Calm. Exhaust.",
+      "effects": {"retain": true, "enter_stance": "calm"}
+    }
+  ],
+  "uncommon_cards": [
+    {
+      "name": "Battle Hymn",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the start of each turn, add a Smite to your hand.",
+      "effects": {"add_smite_per_turn": true}
+    },
+    {
+      "name": "Carve Reality",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 6 damage. Add a Smite to your hand.",
+      "effects": {"damage": 6, "add_smite": true}
+    },
+    {
+      "name": "Collect",
+      "cost": "X",
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Put a Miracle into your hand at the start of your next X turns. Exhaust.",
+      "effects": {"miracle_next_x_turns": true}
+    },
+    {
+      "name": "Conclude",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 12 damage to ALL enemies. End your turn.",
+      "effects": {"damage": 12, "target": "all", "end_turn": true}
+    },
+    {
+      "name": "Deceive Reality",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 4 Block. Add a Safety into your hand.",
+      "effects": {"block": 4, "add_safety": true}
+    },
+    {
+      "name": "Empty Mind",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Draw 2 cards. Exit your Stance.",
+      "effects": {"draw": 2, "exit_stance": true}
+    },
+    {
+      "name": "Fasting",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Gain 3 Strength. Gain 3 Dexterity. Gain 1 less Energy at the start of each turn.",
+      "effects": {"strength": 3, "dexterity": 3, "energy_per_turn": -1}
+    },
+    {
+      "name": "Fear No Evil",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 8 damage. If the enemy intends to attack, enter Calm.",
+      "effects": {"damage": 8, "enter_calm_if_attack": true}
+    },
+    {
+      "name": "Foreign Influence",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Choose 1 of 3 Attacks of any color to add to your hand. Exhaust.",
+      "effects": {"choose_attack": 3}
+    },
+    {
+      "name": "Foresight",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the start of your turn, Scry 3.",
+      "effects": {"scry_per_turn": 3}
+    },
+    {
+      "name": "Indignation",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "If you are in Wrath, apply 3 Vulnerable to ALL enemies. Otherwise, enter Wrath.",
+      "effects": {"vulnerable_if_wrath": 3, "enter_wrath_otherwise": true}
+    },
+    {
+      "name": "Inner Peace",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "If you are in Calm, draw 3 cards. Otherwise, enter Calm.",
+      "effects": {"draw_if_calm": 3, "enter_calm_otherwise": true}
+    },
+    {
+      "name": "Like Water",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the end of your turn, if you are in Calm, gain 5 Block.",
+      "effects": {"block_if_calm_end_turn": 5}
+    },
+    {
+      "name": "Meditate",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Put up to 2 cards from your discard pile into your hand. Enter Calm. End your turn.",
+      "effects": {"retrieve_discard": 2, "enter_stance": "calm", "end_turn": true}
+    },
+    {
+      "name": "Mental Fortress",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Whenever you change Stance, gain 4 Block.",
+      "effects": {"block_on_stance_change": 4}
+    },
+    {
+      "name": "Nirvana",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Whenever you Scry, gain 3 Block.",
+      "effects": {"block_on_scry": 3}
+    },
+    {
+      "name": "Perseverance",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Retain. Gain 5 Block. When Retained, increase its Block by 2.",
+      "effects": {"retain": true, "block": 5, "block_increase_on_retain": 2}
+    },
+    {
+      "name": "Pray",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Retain. Gain 3 Mantra. Shuffle an Insight into your draw pile.",
+      "effects": {"retain": true, "mantra": 3, "add_insight": true}
+    },
+    {
+      "name": "Reach Heaven",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 10 damage. Shuffle a Through Violence into your draw pile.",
+      "effects": {"damage": 10, "add_through_violence": true}
+    },
+    {
+      "name": "Rushdown",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "Whenever you enter Wrath, draw 2 cards.",
+      "effects": {"draw_on_wrath": 2}
+    },
+    {
+      "name": "Sanctity",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 6 Block. If the last card played was a Skill, draw 2 cards.",
+      "effects": {"block": 6, "draw_if_skill": 2}
+    },
+    {
+      "name": "Sands of Time",
+      "cost": 4,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Retain. Deal 20 damage. When Retained, reduce its cost by 1.",
+      "effects": {"retain": true, "damage": 20, "cost_reduction_on_retain": 1}
+    },
+    {
+      "name": "Signature Move",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Can only be played if this is the only Attack in your hand. Deal 30 damage.",
+      "effects": {"damage": 30, "requires_only_attack": true}
+    },
+    {
+      "name": "Simmering Fury",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "At the start of your next turn, enter Wrath and draw 2 cards.",
+      "effects": {"enter_wrath_next_turn": true, "draw_next_turn": 2}
+    },
+    {
+      "name": "Study",
+      "cost": 2,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "description": "At the end of your turn, shuffle an Insight into your draw pile.",
+      "effects": {"add_insight_per_turn": true}
+    },
+    {
+      "name": "Swivel",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Gain 8 Block. The next Attack you play costs 0.",
+      "effects": {"block": 8, "next_attack_costs_zero": true}
+    },
+    {
+      "name": "Talk to the Hand",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "exhaust": true,
+      "description": "Deal 5 damage. Whenever you attack this enemy, gain 2 Block. Exhaust.",
+      "effects": {"damage": 5, "block_on_attack_enemy": 2}
+    },
+    {
+      "name": "Tantrum",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 3 damage 3 times. Enter Wrath. Shuffle this card into your draw pile.",
+      "effects": {"damage": 3, "hits": 3, "enter_stance": "wrath", "shuffle_self": true}
+    },
+    {
+      "name": "Wallop",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 9 damage. Gain Block equal to unblocked damage dealt.",
+      "effects": {"damage": 9, "block_equals_unblocked": true}
+    },
+    {
+      "name": "Wave of the Hand",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Whenever you gain Block this turn, apply 1 Weak to ALL enemies.",
+      "effects": {"weak_on_block": 1, "target": "all"}
+    },
+    {
+      "name": "Wheel Kick",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Deal 15 damage. Draw 2 cards.",
+      "effects": {"damage": 15, "draw": 2}
+    },
+    {
+      "name": "Windmill Strike",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "description": "Retain. Deal 7 damage. When Retained, increase its damage by 4.",
+      "effects": {"retain": true, "damage": 7, "damage_increase_on_retain": 4}
+    },
+    {
+      "name": "Worship",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Retain. Gain 5 Mantra.",
+      "effects": {"retain": true, "mantra": 5}
+    },
+    {
+      "name": "Wreath of Flame",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "description": "Your next Attack deals 5 additional damage.",
+      "effects": {"next_attack_damage": 5}
+    }
+  ],
+  "rare_cards": [
+    {
+      "name": "Alpha",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Shuffle a Beta into your draw pile. Exhaust.",
+      "effects": {"add_beta": true}
+    },
+    {
+      "name": "Blasphemy",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Enter Divinity. Die next turn. Exhaust.",
+      "effects": {"enter_stance": "divinity", "die_next_turn": true}
+    },
+    {
+      "name": "Brilliance",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 12 damage. Deals additional damage equal to Mantra gained this combat.",
+      "effects": {"damage": 12, "damage_per_mantra": true}
+    },
+    {
+      "name": "Conjure Blade",
+      "cost": "X",
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Shuffle an Expunger with X+1 hits into your draw pile. Exhaust.",
+      "effects": {"add_expunger_x": true}
+    },
+    {
+      "name": "Deus Ex Machina",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "Unplayable. When you draw this card, add 2 Miracles to your hand. Exhaust.",
+      "effects": {"unplayable": true, "add_miracles_on_draw": 2}
+    },
+    {
+      "name": "Devotion",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "At the start of your turn, gain 2 Mantra.",
+      "effects": {"mantra_per_turn": 2}
+    },
+    {
+      "name": "Establishment",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Whenever a card is Retained, reduce its cost by 1 this combat.",
+      "effects": {"cost_reduction_on_retain": 1}
+    },
+    {
+      "name": "Judgment",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "If the enemy has 30 or less HP, set their HP to 0.",
+      "effects": {"execute_threshold": 30}
+    },
+    {
+      "name": "Lesson Learned",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Deal 10 damage. If this kills the enemy, upgrade a random card in your deck. Exhaust.",
+      "effects": {"damage": 10, "upgrade_on_kill": true}
+    },
+    {
+      "name": "Master Reality",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "description": "Whenever a card is created during combat, Upgrade it.",
+      "effects": {"upgrade_created_cards": true}
+    },
+    {
+      "name": "Omniscience",
+      "cost": 4,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Choose a card in your draw pile. Play it twice and Exhaust it. Exhaust.",
+      "effects": {"play_from_draw_twice": true}
+    },
+    {
+      "name": "Ragnarok",
+      "cost": 3,
+      "type": "Attack",
+      "rarity": "Rare",
+      "description": "Deal 5 damage to ALL enemies 5 times.",
+      "effects": {"damage": 5, "hits": 5, "target": "all"}
+    },
+    {
+      "name": "Scrawl",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Draw cards until your hand is full. Exhaust.",
+      "effects": {"draw_to_hand_limit": true}
+    },
+    {
+      "name": "Spirit Shield",
+      "cost": 2,
+      "type": "Skill",
+      "rarity": "Rare",
+      "description": "Gain 3 Block for each card in your hand.",
+      "effects": {"block_per_card_in_hand": 3}
+    },
+    {
+      "name": "Vault",
+      "cost": 3,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Take an extra turn after this one. End your turn. Exhaust.",
+      "effects": {"extra_turn": true, "end_turn": true}
+    },
+    {
+      "name": "Wish",
+      "cost": 3,
+      "type": "Skill",
+      "rarity": "Rare",
+      "exhaust": true,
+      "description": "Choose one: Gain 6 Plated Armor; Gain 3 Strength; Gain 25 Gold. Exhaust.",
+      "effects": {"choose_one": ["plated_armor_6", "strength_3", "gold_25"]}
+    }
+  ],
+  "special_cards": [
+    {
+      "name": "Miracle",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Special",
+      "exhaust": true,
+      "description": "Retain. Gain 1 Energy. Exhaust.",
+      "effects": {"retain": true, "energy": 1}
+    },
+    {
+      "name": "Smite",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Special",
+      "exhaust": true,
+      "description": "Retain. Deal 12 damage. Exhaust.",
+      "effects": {"retain": true, "damage": 12}
+    },
+    {
+      "name": "Safety",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Special",
+      "exhaust": true,
+      "description": "Retain. Gain 12 Block. Exhaust.",
+      "effects": {"retain": true, "block": 12}
+    },
+    {
+      "name": "Insight",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Special",
+      "exhaust": true,
+      "description": "Retain. Draw 2 cards. Exhaust.",
+      "effects": {"retain": true, "draw": 2}
+    },
+    {
+      "name": "Through Violence",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Special",
+      "exhaust": true,
+      "description": "Retain. Deal 20 damage. Exhaust.",
+      "effects": {"retain": true, "damage": 20}
+    }
+  ]
+}

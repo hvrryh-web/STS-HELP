@@ -1,0 +1,699 @@
+{
+  "starter_relics": {
+    "Burning Blood": {
+      "character": "Ironclad",
+      "rarity": "Starter",
+      "description": "At the end of combat, heal 6 HP.",
+      "effects": {"heal_end_combat": 6}
+    },
+    "Ring of the Snake": {
+      "character": "Silent",
+      "rarity": "Starter",
+      "description": "At the start of each combat, draw 2 additional cards.",
+      "effects": {"draw_turn_1_bonus": 2}
+    },
+    "Cracked Core": {
+      "character": "Defect",
+      "rarity": "Starter",
+      "description": "At the start of each combat, channel 1 Lightning.",
+      "effects": {"channel_start_combat": "lightning"}
+    },
+    "Pure Water": {
+      "character": "Watcher",
+      "rarity": "Starter",
+      "description": "At the start of each combat, add a Miracle to your hand.",
+      "effects": {"add_card_start_combat": "miracle"}
+    }
+  },
+  "common_relics": {
+    "Akabeko": {
+      "rarity": "Common",
+      "description": "Your first Attack each combat deals 8 additional damage.",
+      "effects": {"first_attack_bonus": 8}
+    },
+    "Anchor": {
+      "rarity": "Common",
+      "description": "Start each combat with 10 Block.",
+      "effects": {"block_start_combat": 10}
+    },
+    "Ancient Tea Set": {
+      "rarity": "Common",
+      "description": "Whenever you enter a Rest Site, start the next combat with 2 extra Energy.",
+      "effects": {"energy_after_rest": 2}
+    },
+    "Art of War": {
+      "rarity": "Common",
+      "description": "If you do not play an Attack during your turn, gain an extra Energy next turn.",
+      "effects": {"energy_if_no_attack": 1}
+    },
+    "Bag of Marbles": {
+      "rarity": "Common",
+      "description": "At the start of each combat, apply 1 Vulnerable to ALL enemies.",
+      "effects": {"vulnerable_start_combat": 1, "target": "all"}
+    },
+    "Bag of Preparation": {
+      "rarity": "Common",
+      "description": "At the start of each combat, draw 2 additional cards.",
+      "effects": {"draw_start_combat": 2}
+    },
+    "Blood Vial": {
+      "rarity": "Common",
+      "description": "At the start of each combat, heal 2 HP.",
+      "effects": {"heal_start_combat": 2}
+    },
+    "Bronze Scales": {
+      "rarity": "Common",
+      "description": "Whenever you take damage, deal 3 damage back.",
+      "effects": {"thorns": 3}
+    },
+    "Centennial Puzzle": {
+      "rarity": "Common",
+      "description": "The first time you lose HP each combat, draw 3 cards.",
+      "effects": {"draw_on_first_hp_loss": 3}
+    },
+    "Ceramic Fish": {
+      "rarity": "Common",
+      "description": "Whenever you add a card to your deck, gain 9 Gold.",
+      "effects": {"gold_on_card_add": 9}
+    },
+    "Dream Catcher": {
+      "rarity": "Common",
+      "description": "Whenever you rest, you may add a card to your deck.",
+      "effects": {"card_reward_on_rest": true}
+    },
+    "Happy Flower": {
+      "rarity": "Common",
+      "description": "Every 3 turns, gain 1 Energy.",
+      "effects": {"energy_every_n_turns": 3}
+    },
+    "Juzu Bracelet": {
+      "rarity": "Common",
+      "description": "Regular enemy combats are no longer encountered in ? rooms.",
+      "effects": {"no_event_fights": true}
+    },
+    "Lantern": {
+      "rarity": "Common",
+      "description": "Gain 1 Energy on the first turn of each combat.",
+      "effects": {"energy_turn_1": 1}
+    },
+    "Maw Bank": {
+      "rarity": "Common",
+      "description": "Whenever you climb a floor, gain 12 Gold. Loses its effect if you spend any Gold at a Shop.",
+      "effects": {"gold_per_floor": 12, "disabled_on_shop": true}
+    },
+    "Meal Ticket": {
+      "rarity": "Common",
+      "description": "Whenever you enter a Shop, heal 15 HP.",
+      "effects": {"heal_at_shop": 15}
+    },
+    "Nunchaku": {
+      "rarity": "Common",
+      "description": "Every time you play 10 Attacks, gain 1 Energy.",
+      "effects": {"energy_per_10_attacks": 1}
+    },
+    "Oddly Smooth Stone": {
+      "rarity": "Common",
+      "description": "Gain 1 Dexterity.",
+      "effects": {"dexterity": 1}
+    },
+    "Omamori": {
+      "rarity": "Common",
+      "description": "Negate the next 2 Curses you would obtain.",
+      "effects": {"negate_curses": 2}
+    },
+    "Orichalcum": {
+      "rarity": "Common",
+      "description": "If you end your turn without Block, gain 6 Block.",
+      "effects": {"block_if_no_block": 6}
+    },
+    "Pen Nib": {
+      "rarity": "Common",
+      "description": "Every 10th Attack you play deals double damage.",
+      "effects": {"double_damage_every_10": true}
+    },
+    "Potion Belt": {
+      "rarity": "Common",
+      "description": "Upon pickup, gain 2 Potion slots.",
+      "effects": {"potion_slots": 2}
+    },
+    "Preserved Insect": {
+      "rarity": "Common",
+      "description": "Elites have 25% less HP.",
+      "effects": {"elite_hp_reduction": 0.25}
+    },
+    "Regal Pillow": {
+      "rarity": "Common",
+      "description": "Heal an additional 15 HP when you Rest.",
+      "effects": {"rest_heal_bonus": 15}
+    },
+    "Smiling Mask": {
+      "rarity": "Common",
+      "description": "The cost to remove cards at a shop is 50 Gold.",
+      "effects": {"remove_cost_flat": 50}
+    },
+    "Strawberry": {
+      "rarity": "Common",
+      "description": "Raise your Max HP by 7.",
+      "effects": {"max_hp": 7}
+    },
+    "The Boot": {
+      "rarity": "Common",
+      "description": "Whenever you deal 4 or less unblocked Attack damage, increase it to 5.",
+      "effects": {"minimum_attack_damage": 5}
+    },
+    "Tiny Chest": {
+      "rarity": "Common",
+      "description": "Every 4th ? room is a Treasure room.",
+      "effects": {"treasure_every_4_events": true}
+    },
+    "Toy Ornithopter": {
+      "rarity": "Common",
+      "description": "Whenever you use a Potion, heal 5 HP.",
+      "effects": {"heal_on_potion": 5}
+    },
+    "Vajra": {
+      "rarity": "Common",
+      "description": "Gain 1 Strength.",
+      "effects": {"strength": 1}
+    },
+    "War Paint": {
+      "rarity": "Common",
+      "description": "Upon pickup, upgrade 2 random Skills.",
+      "effects": {"upgrade_random_skills": 2}
+    },
+    "Whetstone": {
+      "rarity": "Common",
+      "description": "Upon pickup, upgrade 2 random Attacks.",
+      "effects": {"upgrade_random_attacks": 2}
+    }
+  },
+  "uncommon_relics": {
+    "Blue Candle": {
+      "rarity": "Uncommon",
+      "description": "Curse cards can now be played. Playing a Curse will make you lose 1 HP and Exhausts the card.",
+      "effects": {"curse_playable": true, "curse_hp_cost": 1}
+    },
+    "Bottled Flame": {
+      "rarity": "Uncommon",
+      "description": "Upon pickup, choose an Attack. At the start of each combat, this card will be in your hand.",
+      "effects": {"innate_attack": true}
+    },
+    "Bottled Lightning": {
+      "rarity": "Uncommon",
+      "description": "Upon pickup, choose a Skill. At the start of each combat, this card will be in your hand.",
+      "effects": {"innate_skill": true}
+    },
+    "Bottled Tornado": {
+      "rarity": "Uncommon",
+      "description": "Upon pickup, choose a Power. At the start of each combat, this card will be in your hand.",
+      "effects": {"innate_power": true}
+    },
+    "Darkstone Periapt": {
+      "rarity": "Uncommon",
+      "description": "Whenever you obtain a Curse, raise your Max HP by 6.",
+      "effects": {"max_hp_per_curse": 6}
+    },
+    "Eternal Feather": {
+      "rarity": "Uncommon",
+      "description": "Whenever you enter a Rest Site, heal 3 HP for every 5 cards in your deck.",
+      "effects": {"heal_per_5_cards_at_rest": 3}
+    },
+    "Frozen Egg": {
+      "rarity": "Uncommon",
+      "description": "Whenever you add a Power card to your deck, it is upgraded.",
+      "effects": {"upgrade_powers": true}
+    },
+    "Gremlin Horn": {
+      "rarity": "Uncommon",
+      "description": "Whenever an enemy dies, gain 1 Energy and draw 1 card.",
+      "effects": {"energy_on_kill": 1, "draw_on_kill": 1}
+    },
+    "Horn Cleat": {
+      "rarity": "Uncommon",
+      "description": "At the start of your 2nd turn, gain 14 Block.",
+      "effects": {"block_turn_2": 14}
+    },
+    "Ink Bottle": {
+      "rarity": "Uncommon",
+      "description": "Whenever you play 10 cards, draw 1 card.",
+      "effects": {"draw_every_10_cards": 1}
+    },
+    "Kunai": {
+      "rarity": "Uncommon",
+      "description": "Every time you play 3 Attacks in a single turn, gain 1 Dexterity.",
+      "effects": {"dexterity_per_3_attacks": 1}
+    },
+    "Letter Opener": {
+      "rarity": "Uncommon",
+      "description": "Every time you play 3 Skills in a single turn, deal 5 damage to ALL enemies.",
+      "effects": {"damage_per_3_skills": 5, "target": "all"}
+    },
+    "Matryoshka": {
+      "rarity": "Uncommon",
+      "description": "The next 2 non-boss chests you open contain 2 relics.",
+      "effects": {"double_chest_relics": 2}
+    },
+    "Meat on the Bone": {
+      "rarity": "Uncommon",
+      "description": "If your HP is at 50% or less at the end of combat, heal 12 HP.",
+      "effects": {"heal_if_low_hp": 12}
+    },
+    "Mercury Hourglass": {
+      "rarity": "Uncommon",
+      "description": "At the start of your turn, deal 3 damage to ALL enemies.",
+      "effects": {"damage_start_turn": 3, "target": "all"}
+    },
+    "Molten Egg": {
+      "rarity": "Uncommon",
+      "description": "Whenever you add an Attack card to your deck, it is upgraded.",
+      "effects": {"upgrade_attacks": true}
+    },
+    "Mummified Hand": {
+      "rarity": "Uncommon",
+      "description": "Whenever you play a Power, a random card in your hand costs 0 that turn.",
+      "effects": {"random_card_zero_on_power": true}
+    },
+    "Ornamental Fan": {
+      "rarity": "Uncommon",
+      "description": "Every time you play 3 Attacks in a single turn, gain 4 Block.",
+      "effects": {"block_per_3_attacks": 4}
+    },
+    "Pantograph": {
+      "rarity": "Uncommon",
+      "description": "At the start of Boss combats, heal 25 HP.",
+      "effects": {"heal_at_boss": 25}
+    },
+    "Paper Frog": {
+      "rarity": "Uncommon",
+      "description": "Enemies with Vulnerable take 75% more damage rather than 50%.",
+      "effects": {"vulnerable_bonus": 0.75}
+    },
+    "Pear": {
+      "rarity": "Uncommon",
+      "description": "Raise your Max HP by 10.",
+      "effects": {"max_hp": 10}
+    },
+    "Question Card": {
+      "rarity": "Uncommon",
+      "description": "Future card rewards have 1 additional card to choose from.",
+      "effects": {"extra_card_reward": 1}
+    },
+    "Shuriken": {
+      "rarity": "Uncommon",
+      "description": "Every time you play 3 Attacks in a single turn, gain 1 Strength.",
+      "effects": {"strength_per_3_attacks": 1}
+    },
+    "Singing Bowl": {
+      "rarity": "Uncommon",
+      "description": "When adding cards to your deck, you may gain +2 Max HP instead.",
+      "effects": {"max_hp_instead_of_card": 2}
+    },
+    "Strike Dummy": {
+      "rarity": "Uncommon",
+      "description": "Cards containing 'Strike' deal 3 additional damage.",
+      "effects": {"strike_damage_bonus": 3}
+    },
+    "Sundial": {
+      "rarity": "Uncommon",
+      "description": "Every 3 times you shuffle your draw pile, gain 2 Energy.",
+      "effects": {"energy_per_3_shuffles": 2}
+    },
+    "Toxic Egg": {
+      "rarity": "Uncommon",
+      "description": "Whenever you add a Skill card to your deck, it is upgraded.",
+      "effects": {"upgrade_skills": true}
+    },
+    "White Beast Statue": {
+      "rarity": "Uncommon",
+      "description": "Potions always spawn after combat.",
+      "effects": {"guaranteed_potion": true}
+    }
+  },
+  "rare_relics": {
+    "Bird-Faced Urn": {
+      "rarity": "Rare",
+      "description": "Whenever you play a Power, heal 2 HP.",
+      "effects": {"heal_on_power": 2}
+    },
+    "Calipers": {
+      "rarity": "Rare",
+      "description": "At the start of your turn, lose 15 Block instead of all of your Block.",
+      "effects": {"retain_block_minus_15": true}
+    },
+    "Captain's Wheel": {
+      "rarity": "Rare",
+      "description": "At the start of your 3rd turn, gain 18 Block.",
+      "effects": {"block_turn_3": 18}
+    },
+    "Dead Branch": {
+      "rarity": "Rare",
+      "description": "Whenever you Exhaust a card, add a random card to your hand.",
+      "effects": {"add_card_on_exhaust": true}
+    },
+    "Du-Vu Doll": {
+      "rarity": "Rare",
+      "description": "For each Curse in your deck, start each combat with 1 additional Strength.",
+      "effects": {"strength_per_curse": 1}
+    },
+    "Fossilized Helix": {
+      "rarity": "Rare",
+      "description": "Prevent the first time you would lose HP in each combat.",
+      "effects": {"prevent_first_damage": true}
+    },
+    "Gambling Chip": {
+      "rarity": "Rare",
+      "description": "At the start of each combat, discard any number of cards, then draw that many.",
+      "effects": {"mulligan_start_combat": true}
+    },
+    "Ginger": {
+      "rarity": "Rare",
+      "description": "You can no longer become Weakened.",
+      "effects": {"immune_weak": true}
+    },
+    "Girya": {
+      "rarity": "Rare",
+      "description": "Upon pickup, you can gain 1 Strength 3 times at Rest Sites.",
+      "effects": {"strength_at_rest": 1, "uses": 3}
+    },
+    "Ice Cream": {
+      "rarity": "Rare",
+      "description": "Energy is now conserved between turns.",
+      "effects": {"conserve_energy": true}
+    },
+    "Incense Burner": {
+      "rarity": "Rare",
+      "description": "Every 6 turns, gain 1 Intangible.",
+      "effects": {"intangible_every_6_turns": 1}
+    },
+    "Lizard Tail": {
+      "rarity": "Rare",
+      "description": "When you would die, heal to 50% of your Max HP instead. (Works Once)",
+      "effects": {"revive_once": true}
+    },
+    "Mango": {
+      "rarity": "Rare",
+      "description": "Raise your Max HP by 14.",
+      "effects": {"max_hp": 14}
+    },
+    "Old Coin": {
+      "rarity": "Rare",
+      "description": "Gain 300 Gold.",
+      "effects": {"gold": 300}
+    },
+    "Peace Pipe": {
+      "rarity": "Rare",
+      "description": "You can now remove cards at Rest Sites.",
+      "effects": {"remove_at_rest": true}
+    },
+    "Pocketwatch": {
+      "rarity": "Rare",
+      "description": "Whenever you play 3 or fewer cards during your turn, draw 3 additional cards at the start of your next turn.",
+      "effects": {"draw_if_few_cards": 3}
+    },
+    "Prayer Wheel": {
+      "rarity": "Rare",
+      "description": "Normal enemies drop an additional card reward.",
+      "effects": {"extra_card_drop": true}
+    },
+    "Shovel": {
+      "rarity": "Rare",
+      "description": "You can now Dig for relics at Rest Sites.",
+      "effects": {"dig_at_rest": true}
+    },
+    "Stone Calendar": {
+      "rarity": "Rare",
+      "description": "At the end of turn 7, deal 52 damage to ALL enemies.",
+      "effects": {"damage_turn_7": 52, "target": "all"}
+    },
+    "The Courier": {
+      "rarity": "Rare",
+      "description": "The Merchant now sells Potions and Card Removal services, and his prices are reduced by 20%.",
+      "effects": {"shop_discount": 0.2, "shop_potions": true}
+    },
+    "Thread and Needle": {
+      "rarity": "Rare",
+      "description": "At the start of each combat, gain 4 Plated Armor.",
+      "effects": {"plated_armor_start": 4}
+    },
+    "Torii": {
+      "rarity": "Rare",
+      "description": "Whenever you receive 5 or less unblocked Attack damage, reduce it to 1.",
+      "effects": {"reduce_low_damage": 1}
+    },
+    "Tungsten Rod": {
+      "rarity": "Rare",
+      "description": "Whenever you lose HP, lose 1 less.",
+      "effects": {"hp_loss_reduction": 1}
+    },
+    "Turnip": {
+      "rarity": "Rare",
+      "description": "You can no longer become Frailed.",
+      "effects": {"immune_frail": true}
+    },
+    "Unceasing Top": {
+      "rarity": "Rare",
+      "description": "Whenever you have no cards in hand during your turn, draw a card.",
+      "effects": {"draw_on_empty_hand": 1}
+    }
+  },
+  "boss_relics": {
+    "Astrolabe": {
+      "rarity": "Boss",
+      "description": "Upon pickup, choose and Transform 3 cards, then Upgrade them.",
+      "effects": {"transform_upgrade_3": true}
+    },
+    "Black Blood": {
+      "rarity": "Boss",
+      "character": "Ironclad",
+      "description": "At the end of combat, heal 12 HP instead of 6.",
+      "effects": {"heal_end_combat": 12},
+      "replaces": "Burning Blood"
+    },
+    "Black Star": {
+      "rarity": "Boss",
+      "description": "Elites drop an additional relic.",
+      "effects": {"double_elite_relics": true}
+    },
+    "Busted Crown": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. You have 2 less cards to choose from in card rewards.",
+      "effects": {"energy": 1, "card_reward_penalty": 2}
+    },
+    "Calling Bell": {
+      "rarity": "Boss",
+      "description": "Upon pickup, obtain 3 relics and 3 Curses.",
+      "effects": {"gain_3_relics": true, "gain_3_curses": true}
+    },
+    "Coffee Dripper": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. You can no longer Rest at Rest Sites.",
+      "effects": {"energy": 1, "no_rest": true}
+    },
+    "Cursed Key": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. Whenever you open a non-boss chest, obtain a Curse.",
+      "effects": {"energy": 1, "curse_on_chest": true}
+    },
+    "Ectoplasm": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. You can no longer gain Gold.",
+      "effects": {"energy": 1, "no_gold": true}
+    },
+    "Empty Cage": {
+      "rarity": "Boss",
+      "description": "Upon pickup, remove 2 cards from your deck.",
+      "effects": {"remove_2_cards": true}
+    },
+    "Fusion Hammer": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. You can no longer Smith at Rest Sites.",
+      "effects": {"energy": 1, "no_smith": true}
+    },
+    "Holy Water": {
+      "rarity": "Boss",
+      "character": "Watcher",
+      "description": "At the start of each combat, add 3 Miracles to your hand.",
+      "effects": {"miracles_start_combat": 3},
+      "replaces": "Pure Water"
+    },
+    "Hovering Kite": {
+      "rarity": "Boss",
+      "description": "The first time you discard a card each turn, gain 1 Energy.",
+      "effects": {"energy_on_first_discard": 1}
+    },
+    "Inserter": {
+      "rarity": "Boss",
+      "character": "Defect",
+      "description": "Every 2 turns, gain 1 Orb slot.",
+      "effects": {"orb_slot_every_2_turns": 1},
+      "replaces": "Cracked Core"
+    },
+    "Mark of Pain": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. At the start of each combat, shuffle 2 Wounds into your draw pile.",
+      "effects": {"energy": 1, "wounds_start_combat": 2}
+    },
+    "Nuclear Battery": {
+      "rarity": "Boss",
+      "character": "Defect",
+      "description": "At the start of each combat, channel 1 Plasma.",
+      "effects": {"channel_plasma_start": 1}
+    },
+    "Pandora's Box": {
+      "rarity": "Boss",
+      "description": "Transform all Strikes and Defends.",
+      "effects": {"transform_basics": true}
+    },
+    "Philosopher's Stone": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. ALL enemies start with 1 Strength.",
+      "effects": {"energy": 1, "enemy_strength_start": 1}
+    },
+    "Ring of the Serpent": {
+      "rarity": "Boss",
+      "character": "Silent",
+      "description": "At the start of your turn, draw 1 additional card.",
+      "effects": {"draw_per_turn": 1},
+      "replaces": "Ring of the Snake"
+    },
+    "Runic Cube": {
+      "rarity": "Boss",
+      "description": "Whenever you lose HP, draw 1 card.",
+      "effects": {"draw_on_hp_loss": 1}
+    },
+    "Runic Dome": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. You can no longer see enemy Intents.",
+      "effects": {"energy": 1, "hide_intents": true}
+    },
+    "Runic Pyramid": {
+      "rarity": "Boss",
+      "description": "At the end of your turn, you no longer discard your hand.",
+      "effects": {"retain_all": true}
+    },
+    "Sacred Bark": {
+      "rarity": "Boss",
+      "description": "Double the effectiveness of Potions.",
+      "effects": {"double_potions": true}
+    },
+    "Slavers Collar": {
+      "rarity": "Boss",
+      "description": "During Boss and Elite combats, gain 1 Energy at the start of each turn.",
+      "effects": {"energy_boss_elite": 1}
+    },
+    "Snecko Eye": {
+      "rarity": "Boss",
+      "description": "Draw 2 additional cards each turn. At the start of your turn, randomize the cost of all cards in your hand.",
+      "effects": {"draw_bonus": 2, "confused": true}
+    },
+    "Sozu": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. You can no longer obtain Potions.",
+      "effects": {"energy": 1, "no_potions": true}
+    },
+    "Tiny House": {
+      "rarity": "Boss",
+      "description": "Obtain 1 Potion. Gain 50 Gold. Raise your Max HP by 5. Obtain 1 card. Upgrade 1 random card.",
+      "effects": {"potion": 1, "gold": 50, "max_hp": 5, "card": 1, "upgrade_random": 1}
+    },
+    "Velvet Choker": {
+      "rarity": "Boss",
+      "description": "Gain 1 Energy at the start of each turn. You cannot play more than 6 cards per turn.",
+      "effects": {"energy": 1, "card_limit": 6}
+    },
+    "Violet Lotus": {
+      "rarity": "Boss",
+      "character": "Watcher",
+      "description": "Whenever you exit Calm, gain an additional 1 Energy.",
+      "effects": {"calm_energy_bonus": 1}
+    },
+    "Wrist Blade": {
+      "rarity": "Boss",
+      "character": "Silent",
+      "description": "Attacks that cost 0 deal 4 additional damage.",
+      "effects": {"zero_cost_attack_bonus": 4}
+    }
+  },
+  "shop_relics": {
+    "Cauldron": {
+      "rarity": "Shop",
+      "description": "Upon pickup, choose 5 Potions to add to your inventory.",
+      "effects": {"choose_5_potions": true}
+    },
+    "Chemical X": {
+      "rarity": "Shop",
+      "description": "Whenever you play an X cost card, its effects are increased by 2.",
+      "effects": {"x_cost_bonus": 2}
+    },
+    "Clockwork Souvenir": {
+      "rarity": "Shop",
+      "description": "At the start of each combat, gain 1 Artifact.",
+      "effects": {"artifact_start_combat": 1}
+    },
+    "Dolly's Mirror": {
+      "rarity": "Shop",
+      "description": "Upon pickup, obtain a copy of a card in your deck.",
+      "effects": {"duplicate_card": true}
+    },
+    "Frozen Eye": {
+      "rarity": "Shop",
+      "description": "When viewing your Draw Pile, it is now shown in order.",
+      "effects": {"show_draw_order": true}
+    },
+    "Hand Drill": {
+      "rarity": "Shop",
+      "description": "Whenever you break an enemy's Block, apply 2 Vulnerable.",
+      "effects": {"vulnerable_on_block_break": 2}
+    },
+    "Lee's Waffle": {
+      "rarity": "Shop",
+      "description": "Raise your Max HP by 7. Heal all HP.",
+      "effects": {"max_hp": 7, "full_heal": true}
+    },
+    "Medical Kit": {
+      "rarity": "Shop",
+      "description": "Status cards can now be played. Playing a Status will Exhaust the card.",
+      "effects": {"status_playable": true}
+    },
+    "Membership Card": {
+      "rarity": "Shop",
+      "description": "50% discount on all items at the Shop.",
+      "effects": {"shop_discount": 0.5}
+    },
+    "Orange Pellets": {
+      "rarity": "Shop",
+      "description": "Whenever you play a Power, Attack, and Skill in the same turn, remove all of your Debuffs.",
+      "effects": {"cleanse_on_variety": true}
+    },
+    "Orrery": {
+      "rarity": "Shop",
+      "description": "Choose and add 5 cards to your deck.",
+      "effects": {"add_5_cards": true}
+    },
+    "Prismatic Shard": {
+      "rarity": "Shop",
+      "description": "Combat reward screens now contain colorless cards and cards from other colors.",
+      "effects": {"all_color_rewards": true}
+    },
+    "Sling of Courage": {
+      "rarity": "Shop",
+      "description": "Start each Elite combat with 2 Strength.",
+      "effects": {"strength_at_elite": 2}
+    },
+    "Strange Spoon": {
+      "rarity": "Shop",
+      "description": "Cards that Exhaust will instead discard 50% of the time.",
+      "effects": {"exhaust_to_discard_50": true}
+    },
+    "The Abacus": {
+      "rarity": "Shop",
+      "description": "Whenever you shuffle your draw pile, gain 6 Block.",
+      "effects": {"block_on_shuffle": 6}
+    },
+    "Toolbox": {
+      "rarity": "Shop",
+      "description": "At the start of each combat, choose 1 of 3 Colorless cards to add to your hand.",
+      "effects": {"choose_colorless_start": 3}
+    }
+  }
+}

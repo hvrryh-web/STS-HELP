@@ -1,0 +1,248 @@
+{
+  "damage_keywords": {
+    "Vulnerable": {
+      "description": "Target takes 50% more damage from attacks",
+      "formula": "damage = floor(base_damage * 1.5)",
+      "duration": "Decrements by 1 at end of target's turn",
+      "blocked_by": "Artifact",
+      "notes": "Applies before block reduction"
+    },
+    "Weak": {
+      "description": "Target deals 25% less damage from attacks",
+      "formula": "damage = floor(base_damage * 0.75)",
+      "duration": "Decrements by 1 at end of target's turn",
+      "blocked_by": "Artifact"
+    },
+    "Strength": {
+      "description": "Increases attack damage by 1 per stack",
+      "formula": "damage = base_damage + strength",
+      "duration": "Permanent unless modified",
+      "can_be_negative": true
+    },
+    "Frail": {
+      "description": "Target gains 25% less block from cards",
+      "formula": "block = floor(base_block * 0.75)",
+      "duration": "Decrements by 1 at end of target's turn",
+      "blocked_by": "Artifact"
+    },
+    "Dexterity": {
+      "description": "Increases block gain by 1 per stack",
+      "formula": "block = base_block + dexterity",
+      "duration": "Permanent unless modified",
+      "can_be_negative": true
+    }
+  },
+  "damage_over_time": {
+    "Poison": {
+      "description": "At START of poisoned creature's turn, lose HP equal to Poison stacks, then Poison decreases by 1",
+      "formula": "enemy.hp -= enemy.poison; enemy.poison -= 1",
+      "timing": "START of poisoned creature's turn (before enemy actions)",
+      "duration": "Until 0 or cured",
+      "blocked_by": "Artifact blocks application, not existing poison",
+      "bypasses_block": true,
+      "notes": "Poison damage bypasses Block completely. Occurs before enemy takes its action."
+    },
+    "Burn": {
+      "description": "Status card that deals 2 damage when in hand at end of turn",
+      "type": "Status Card",
+      "damage": 2,
+      "upgrades_to": "Burn+"
+    }
+  },
+  "protection_keywords": {
+    "Block": {
+      "description": "Absorbs incoming damage before HP",
+      "duration": "Expires at start of player's next turn (unless modified)",
+      "formula": "damage_to_hp = max(0, attack_damage - block)",
+      "cap": "999 maximum",
+      "notes": "Block is applied after damage modifications"
+    },
+    "Artifact": {
+      "description": "Negates the application of a single debuff",
+      "behavior": "Consumes 1 stack per debuff application EVENT, not magnitude",
+      "example": "5 Vulnerable applied = 1 Artifact consumed, 0 Vulnerable applied",
+      "notes": "Does not prevent damage, only debuffs"
+    },
+    "Intangible": {
+      "description": "Reduce ALL HP loss to 1 this turn",
+      "duration": "Until end of turn, decrements by 1",
+      "notes": "Does not reduce HP loss to less than 1"
+    },
+    "Plated Armor": {
+      "description": "Gain Block at end of turn equal to stacks",
+      "removal": "Lose 1 stack when receiving unblocked attack damage",
+      "notes": "Cannot be removed by debuffs"
+    },
+    "Metallicize": {
+      "description": "At end of turn, gain Block equal to stacks",
+      "duration": "Permanent",
+      "notes": "Triggers after discarding hand"
+    },
+    "Buffer": {
+      "description": "Negate the next time HP would be lost",
+      "stacking": "Multiple stacks prevent multiple instances",
+      "notes": "Does not prevent Block loss"
+    }
+  },
+  "buff_keywords": {
+    "Ritual": {
+      "description": "At end of turn, gain Strength equal to stacks",
+      "duration": "Permanent",
+      "notes": "Common on Cultist enemy"
+    },
+    "Thorns": {
+      "description": "When attacked, deal damage back to attacker",
+      "damage": "Equal to stacks",
+      "notes": "Does not trigger on non-attack damage"
+    },
+    "Regeneration": {
+      "description": "At end of turn, heal HP equal to stacks, then reduce by 1",
+      "duration": "Until 0",
+      "notes": "Rare player effect"
+    },
+    "Barricade": {
+      "description": "Block is not removed at the start of your turn",
+      "duration": "Permanent (Power effect)",
+      "notes": "From Barricade card"
+    }
+  },
+  "orb_keywords": {
+    "Focus": {
+      "description": "Increases passive and evoke values of Orbs (except Plasma)",
+      "formula": "orb_value = base_value + focus",
+      "minimum": "Orb values cannot go below 0",
+      "duration": "Permanent",
+      "character": "Defect",
+      "note": "Focus does NOT affect Plasma orbs"
+    },
+    "Channel": {
+      "description": "Add an Orb to the rightmost empty slot",
+      "overflow": "If full, evokes leftmost Orb first",
+      "character": "Defect"
+    },
+    "Evoke": {
+      "description": "Remove and trigger the leftmost Orb's evoke effect",
+      "notes": "Evoke values are modified by Focus",
+      "character": "Defect"
+    },
+    "Lightning Orb": {
+      "passive": "Deal 3+Focus damage to random enemy at end of turn",
+      "evoke": "Deal 8+Focus damage to random enemy",
+      "character": "Defect"
+    },
+    "Frost Orb": {
+      "passive": "Gain 2+Focus Block at end of turn",
+      "evoke": "Gain 5+Focus Block",
+      "character": "Defect"
+    },
+    "Dark Orb": {
+      "passive": "Gain 6+Focus dark power (accumulates)",
+      "evoke": "Deal accumulated damage to enemy with lowest HP",
+      "character": "Defect"
+    },
+    "Plasma Orb": {
+      "passive": "Gain 1 Energy at start of turn",
+      "passive_value": 1,
+      "evoke": "Gain 2 Energy",
+      "evoke_value": 2,
+      "character": "Defect",
+      "focus_affected": false,
+      "note": "Plasma orbs are NOT affected by Focus - values are always fixed"
+    }
+  },
+  "stance_keywords": {
+    "Neutral": {
+      "description": "No stance bonuses",
+      "damage_dealt": "1x",
+      "damage_received": "1x",
+      "character": "Watcher"
+    },
+    "Wrath": {
+      "description": "Deal and receive double damage",
+      "damage_dealt": "2x",
+      "damage_received": "2x",
+      "on_exit": "None",
+      "character": "Watcher"
+    },
+    "Calm": {
+      "description": "Safe stance with energy bonus on exit",
+      "damage_dealt": "1x",
+      "damage_received": "1x",
+      "on_exit": "Gain 2 Energy",
+      "character": "Watcher"
+    },
+    "Divinity": {
+      "description": "Triple damage with energy bonus, auto-exits",
+      "damage_dealt": "3x",
+      "damage_received": "1x",
+      "on_enter": "Gain 3 Energy",
+      "on_exit": "Automatic at start of next turn",
+      "character": "Watcher"
+    },
+    "Mantra": {
+      "description": "Accumulating resource that triggers Divinity",
+      "threshold": 10,
+      "behavior": "At 10+ Mantra, enter Divinity and lose 10 Mantra",
+      "character": "Watcher"
+    }
+  },
+  "card_keywords": {
+    "Exhaust": {
+      "description": "When played, remove from deck for remainder of combat",
+      "destination": "Exhaust Pile",
+      "notes": "Cannot be retrieved normally"
+    },
+    "Ethereal": {
+      "description": "If in hand at end of turn, Exhaust this card",
+      "trigger": "End of turn, before discard",
+      "notes": "Must be played to avoid exhausting"
+    },
+    "Innate": {
+      "description": "Starts in your hand at the beginning of combat",
+      "order": "Innate cards drawn before normal draw",
+      "multiple": "All Innate cards are drawn"
+    },
+    "Retain": {
+      "description": "This card is not discarded at end of turn",
+      "duration": "One turn (unless specified)",
+      "notes": "Card stays in hand"
+    },
+    "Unplayable": {
+      "description": "Cannot be played from hand",
+      "purpose": "Trigger-based cards (e.g., Reflex)",
+      "notes": "Must be discarded or exhausted"
+    },
+    "X Cost": {
+      "description": "Uses all remaining Energy",
+      "behavior": "Effect scales with Energy spent",
+      "notes": "Affected by Double Energy, Ice Cream"
+    }
+  },
+  "utility_keywords": {
+    "Scry": {
+      "description": "Look at top X cards of draw pile, may discard any",
+      "character": "Watcher",
+      "notes": "Discarded cards go to discard pile"
+    },
+    "Upgrade": {
+      "description": "Improve a card's stats or effects",
+      "marker": "+ appended to card name",
+      "permanent": "Until end of combat or permanent to deck"
+    },
+    "Transform": {
+      "description": "Replace a card with a random card of same type",
+      "type_match": "Attack -> Attack, Skill -> Skill, etc.",
+      "notes": "Transformed card is removed from deck"
+    },
+    "Curses": {
+      "description": "Negative cards that clog deck",
+      "types": ["Regret", "Pain", "Decay", "Doubt", "Shame"],
+      "removal": "Must be removed at shop or Rest Site"
+    },
+    "Status": {
+      "description": "Negative cards added by enemies",
+      "types": ["Dazed", "Wound", "Burn", "Slimed", "Void"],
+      "behavior": "Usually Unplayable, Ethereal"
+    }
+  }
+}
