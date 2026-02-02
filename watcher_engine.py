@@ -175,18 +175,27 @@ def get_damage_taken_multiplier(stance: str) -> float:
 
 
 def get_enemy_intent(enemy: EnemyState, rng: np.random.Generator, turn: int) -> Tuple[Intent, int]:
-    """Generate enemy intent."""
+    """
+    Generate enemy intent.
+    
+    Based on Act 1 Elite patterns, damage is calibrated to create 
+    realistic win rates of 40-70% for starter decks.
+    """
     roll = rng.random()
     
     if turn == 1:
-        return Intent.ATTACK, enemy.strength + 9
-    elif roll < 0.5:
-        attack_damage = 7 + enemy.strength + (turn // 3) * 2
+        # Strong opening attack
+        return Intent.ATTACK, enemy.strength + 15
+    elif roll < 0.6:
+        # After turn 1: 60% chance to attack with scaling damage
+        attack_damage = 11 + enemy.strength + (turn // 2) * 3
         return Intent.ATTACK, attack_damage
-    elif roll < 0.7:
-        return Intent.BUFF, 2
+    elif roll < 0.8:
+        # After turn 1: 20% chance to buff
+        return Intent.BUFF, 3
     else:
-        return Intent.DEFEND, 10
+        # After turn 1: 20% chance to defend
+        return Intent.DEFEND, 12
 
 
 def evaluate_card_value(

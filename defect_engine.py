@@ -232,18 +232,27 @@ def process_orb_passives(player: DefectState, enemy: EnemyState) -> int:
 
 
 def get_enemy_intent(enemy: EnemyState, rng: np.random.Generator, turn: int) -> Tuple[Intent, int]:
-    """Generate enemy intent."""
+    """
+    Generate enemy intent.
+    
+    Based on Act 1 Elite patterns, damage is calibrated to create 
+    realistic win rates of 40-70% for starter decks.
+    """
     roll = rng.random()
     
     if turn == 1:
-        return Intent.ATTACK, enemy.strength + 11
-    elif roll < 0.55:
-        attack_damage = 9 + enemy.strength + (turn // 3) * 2
+        # Strong opening attack
+        return Intent.ATTACK, enemy.strength + 17
+    elif roll < 0.65:
+        # After turn 1: 65% chance to attack with scaling damage
+        attack_damage = 13 + enemy.strength + (turn // 2) * 3
         return Intent.ATTACK, attack_damage
-    elif roll < 0.75:
+    elif roll < 0.85:
+        # After turn 1: 20% chance to buff
         return Intent.BUFF, 3
     else:
-        return Intent.DEFEND, 12
+        # After turn 1: 15% chance to defend
+        return Intent.DEFEND, 14
 
 
 def evaluate_card_value(

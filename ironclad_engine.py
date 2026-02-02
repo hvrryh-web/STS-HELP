@@ -118,6 +118,10 @@ def get_enemy_intent(enemy: EnemyState, rng: np.random.Generator, turn: int) -> 
     
     Resolution for G3: Intent-aware defensive play.
     
+    Based on Act 1 Elite patterns (e.g., Gremlin Nob, Lagavulin, Sentries),
+    damage is calibrated to create realistic win rates of 40-70% for
+    starter decks with no upgrades or card additions.
+    
     Args:
         enemy: Enemy state.
         rng: Random number generator.
@@ -130,18 +134,19 @@ def get_enemy_intent(enemy: EnemyState, rng: np.random.Generator, turn: int) -> 
     roll = rng.random()
     
     if turn == 1:
-        # First turn often an attack
-        return Intent.ATTACK, enemy.strength + 12
-    elif roll < 0.6:
-        # 60% chance to attack
-        attack_damage = 8 + enemy.strength + (turn // 3) * 2
+        # First turn: strong opening attack (like Gremlin Nob)
+        return Intent.ATTACK, enemy.strength + 18
+    elif roll < 0.7:
+        # After turn 1: 70% chance to attack with scaling damage
+        # Base 14 damage + strength + turn scaling
+        attack_damage = 14 + enemy.strength + (turn // 2) * 3
         return Intent.ATTACK, attack_damage
-    elif roll < 0.8:
-        # 20% chance to buff
-        return Intent.BUFF, 2
+    elif roll < 0.85:
+        # After turn 1: 15% chance to buff (gain strength)
+        return Intent.BUFF, 3
     else:
-        # 20% chance to defend
-        return Intent.DEFEND, 10
+        # After turn 1: 15% chance to defend
+        return Intent.DEFEND, 12
     
 
 def evaluate_card_value(
