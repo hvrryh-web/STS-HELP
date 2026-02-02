@@ -16,6 +16,23 @@ from engine_common import (
     create_starter_deck, get_playable_cards
 )
 
+# =========================================================================
+# EVALUATION CONSTANTS
+# Configurable parameters for card evaluation heuristics
+# =========================================================================
+
+# Average enemy attack damage used for estimating weak value
+AVG_ENEMY_ATTACK_DAMAGE = 10
+
+# Weak reduces incoming damage by this fraction
+WEAK_DAMAGE_REDUCTION = 0.25
+
+# Poison value multiplier (applied after triangular sum calculation)
+POISON_VALUE_MULTIPLIER = 0.9
+
+# HP divisor for estimating remaining turns
+TURNS_PER_HP_DIVISOR = 15
+
 
 # Silent-specific cards
 SILENT_CARDS = {
@@ -193,22 +210,37 @@ def evaluate_card_value(
         poison_amount = effects['poison']
         if 'hits' in effects:
             poison_amount *= effects['hits']
-        # Estimate turns to kill
-        remaining_hp = enemy.hp
-        turns_estimate = remaining_hp // (enemy.poison + poison_amount + 1) if enemy.poison + poison_amount > 0 else 10
-        # Total poison damage over remaining turns
-        poison_damage = sum(range(1, enemy.poison + poison_amount + 1))
-        value += min(poison_damage, remaining_hp) * 0.9
+        
+        # Calculate incremental poison damage using triangular number formula
+        current_poison = enemy.poison
+        new_total = current_poison + poison_amount
+        # Total damage from poison n = n*(n+1)/2 (triangular number)
+        damage_with_new = new_total * (new_total + 1) / 2
+        damage_without_new = current_poison * (current_poison + 1) / 2
+        incremental_damage = damage_with_new - damage_without_new
+        value += min(incremental_damage, enemy.hp) * POISON_VALUE_MULTIPLIER
     
-    # Double poison (Catalyst)
-    if effects.get('double_poison'):
+    # Double/Triple poison (Catalyst - triples when upgraded)
+    if effects.get('double_poison') or effects.get('triple_poison'):
         if enemy.poison > 0:
-            value += enemy.poison * 3  # High value if poison is stacked
+            current = enemy.poison
+            # Catalyst doubles (or triples if upgraded)
+            multiplier = 3 if effects.get('triple_poison') else 2
+            new_poison = current * multiplier
+            # Calculate value of the multiplication
+            damage_new = new_poison * (new_poison + 1) / 2
+            damage_old = current * (current + 1) / 2
+            incremental = min(damage_new - damage_old, enemy.hp)
+            value += incremental * POISON_VALUE_MULTIPLIER
     
     # Noxious Fumes (poison per turn)
     if 'poison_per_turn' in effects:
-        turns_remaining = max(1, enemy.hp // 15)  # Rough estimate
-        value += effects['poison_per_turn'] * turns_remaining * 2
+        turns_remaining = max(1, enemy.hp // TURNS_PER_HP_DIVISOR)
+        # Each turn adds poison_per_turn, which then deals damage
+        # Over n turns: sum of (1 + 2 + ... + n*poison_per_turn) roughly
+        ppt = effects['poison_per_turn']
+        total_fumes_damage = sum(i * ppt for i in range(1, turns_remaining + 1))
+        value += min(total_fumes_damage, enemy.hp) * 0.7
     
     # Draw value
     if 'draw' in effects:
@@ -217,11 +249,18 @@ def evaluate_card_value(
     # Shivs
     if 'add_shivs' in effects:
         shiv_damage = effects['add_shivs'] * (4 + player.strength)
+        if enemy.vulnerable > 0:
+            shiv_damage = int(shiv_damage * 1.5)
         value += shiv_damage * 0.7
     
     # Weak
     if 'weak' in effects:
-        value += effects['weak'] * 4
+        # Weak reduces incoming damage by WEAK_DAMAGE_REDUCTION for its duration
+        # Value = effective_turns * avg_damage * reduction_fraction
+        turns_remaining = max(1, enemy.hp // TURNS_PER_HP_DIVISOR)
+        effective_duration = min(effects['weak'], turns_remaining)
+        weak_value = effective_duration * AVG_ENEMY_ATTACK_DAMAGE * WEAK_DAMAGE_REDUCTION
+        value += weak_value
     
     # Energy efficiency
     if card.cost > 0:
@@ -425,7 +464,21 @@ def simulate_combat(
         # End of turn
         deck_state.discard_hand()
         
-        # Enemy turn
+        # Enemy turn - POISON TRIGGERS AT START OF ENEMY TURN (BEFORE ACTIONS)
+        # Per verified game mechanics: poison triggers at the START of the
+        # poisoned creature's turn, then decrements by 1. Poison bypasses block.
+        poison_damage = process_poison_tick(enemy)
+        
+        # Check if enemy died from poison before acting
+        if enemy.hp <= 0:
+            result.win = True
+            result.final_hp = player.hp
+            result.enemy_hp = enemy.hp
+            result.damage_taken = starting_hp - player.hp
+            result.peak_poison = peak_poison
+            return result
+        
+        # Enemy takes action after poison
         if enemy.intent == Intent.ATTACK:
             apply_damage_to_player(player, enemy.intent_value, enemy)
         elif enemy.intent == Intent.BUFF:
@@ -437,9 +490,6 @@ def simulate_combat(
                 player.artifact -= 1
             else:
                 player.dexterity -= 1
-        
-        # Process poison at end of enemy turn
-        poison_damage = process_poison_tick(enemy)
         
         if enemy.hp <= 0:
             result.win = True

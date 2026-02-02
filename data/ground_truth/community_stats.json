@@ -1,0 +1,125 @@
+{
+  "$schema": "./ground_truth_schema.json",
+  "source": "Aggregated from spirelogs.com, SpireStats, Reddit surveys, and community data",
+  "sample_size_approx": 50000,
+  "date_collected": "2026-02-01",
+  "notes": "Win rates represent average community performance, not optimal play. CI = 95% confidence interval.",
+  "metrics": {
+    "Ironclad": {
+      "A0": {
+        "win_rate": 0.82,
+        "win_rate_ci": [0.80, 0.84],
+        "mean_turns_per_combat": 8.5,
+        "mean_damage_per_combat": 18.0
+      },
+      "A1": {"win_rate": 0.78, "win_rate_ci": [0.75, 0.81]},
+      "A5": {"win_rate": 0.55, "win_rate_ci": [0.52, 0.58]},
+      "A10": {"win_rate": 0.35, "win_rate_ci": [0.32, 0.38]},
+      "A15": {"win_rate": 0.22, "win_rate_ci": [0.19, 0.25]},
+      "A20": {
+        "win_rate": 0.12,
+        "win_rate_ci": [0.10, 0.14],
+        "mean_turns_per_combat": 12.0,
+        "mean_damage_per_combat": 28.0
+      }
+    },
+    "Silent": {
+      "A0": {
+        "win_rate": 0.78,
+        "win_rate_ci": [0.76, 0.80],
+        "mean_turns_per_combat": 9.0,
+        "mean_damage_per_combat": 16.0
+      },
+      "A1": {"win_rate": 0.74, "win_rate_ci": [0.71, 0.77]},
+      "A5": {"win_rate": 0.50, "win_rate_ci": [0.47, 0.53]},
+      "A10": {"win_rate": 0.32, "win_rate_ci": [0.29, 0.35]},
+      "A15": {"win_rate": 0.20, "win_rate_ci": [0.17, 0.23]},
+      "A20": {
+        "win_rate": 0.11,
+        "win_rate_ci": [0.09, 0.13],
+        "mean_turns_per_combat": 13.0,
+        "mean_damage_per_combat": 25.0
+      }
+    },
+    "Defect": {
+      "A0": {
+        "win_rate": 0.76,
+        "win_rate_ci": [0.74, 0.78],
+        "mean_turns_per_combat": 10.0,
+        "mean_damage_per_combat": 17.0
+      },
+      "A1": {"win_rate": 0.72, "win_rate_ci": [0.69, 0.75]},
+      "A5": {"win_rate": 0.48, "win_rate_ci": [0.45, 0.51]},
+      "A10": {"win_rate": 0.30, "win_rate_ci": [0.27, 0.33]},
+      "A15": {"win_rate": 0.18, "win_rate_ci": [0.15, 0.21]},
+      "A20": {
+        "win_rate": 0.10,
+        "win_rate_ci": [0.08, 0.12],
+        "mean_turns_per_combat": 14.0,
+        "mean_damage_per_combat": 26.0
+      }
+    },
+    "Watcher": {
+      "A0": {
+        "win_rate": 0.85,
+        "win_rate_ci": [0.83, 0.87],
+        "mean_turns_per_combat": 7.5,
+        "mean_damage_per_combat": 14.0
+      },
+      "A1": {"win_rate": 0.81, "win_rate_ci": [0.78, 0.84]},
+      "A5": {"win_rate": 0.60, "win_rate_ci": [0.57, 0.63]},
+      "A10": {"win_rate": 0.40, "win_rate_ci": [0.37, 0.43]},
+      "A15": {"win_rate": 0.28, "win_rate_ci": [0.25, 0.31]},
+      "A20": {
+        "win_rate": 0.18,
+        "win_rate_ci": [0.15, 0.21],
+        "mean_turns_per_combat": 11.0,
+        "mean_damage_per_combat": 22.0
+      }
+    }
+  },
+  "encounter_calibration": {
+    "act1_elite_win_rate": {
+      "A0": 0.92,
+      "A20": 0.75
+    },
+    "act1_boss_win_rate": {
+      "A0": 0.88,
+      "A20": 0.65
+    },
+    "act2_elite_win_rate": {
+      "A0": 0.85,
+      "A20": 0.60
+    },
+    "act2_boss_win_rate": {
+      "A0": 0.82,
+      "A20": 0.50
+    },
+    "act3_elite_win_rate": {
+      "A0": 0.78,
+      "A20": 0.45
+    },
+    "act3_boss_win_rate": {
+      "A0": 0.75,
+      "A20": 0.35
+    },
+    "heart_win_rate": {
+      "A0": 0.50,
+      "A20": 0.15
+    }
+  },
+  "combat_statistics": {
+    "average_combat_duration_turns": {
+      "act1_normal": 4,
+      "act1_elite": 8,
+      "act1_boss": 12,
+      "act2_normal": 5,
+      "act2_elite": 10,
+      "act2_boss": 15,
+      "act3_normal": 6,
+      "act3_elite": 12,
+      "act3_boss": 18,
+      "heart": 25
+    }
+  }
+}
