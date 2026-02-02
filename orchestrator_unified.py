@@ -3,6 +3,7 @@ Unified orchestrator for Slay the Spire simulation.
 Implements parallel batch runner, manifest resume, and per-batch Parquet writer.
 
 Resolution for G6: Per-batch Parquet files with atomic merge.
+Enhanced with provenance tracking per critical review Section 3.
 """
 
 import argparse
@@ -20,6 +21,7 @@ import numpy as np
 import pandas as pd
 
 from seed_utils import make_child_generator, generate_patch_id, get_character_code
+from provenance import create_provenance, save_provenance, ProvenanceInfo
 
 
 # Character engine imports
@@ -163,15 +165,25 @@ def merge_parquet_files(
 
 
 class Manifest:
-    """Manifest for tracking simulation progress and resume."""
+    """
+    Manifest for tracking simulation progress, resume, and provenance.
+    
+    Enhanced per critical review Section 3 to include:
+    - Git commit SHA
+    - Config hash
+    - Environment info
+    - Dataset versions
+    """
     
     def __init__(self, path: Path):
         self.path = path
         self.data: Dict[str, Any] = {
             'completed_batches': [],
             'parameters': {},
+            'provenance': {},
             'start_time': None,
-            'last_update': None
+            'last_update': None,
+            'schema_version': '2.0'  # Added per Section 4
         }
         self.load()
     
@@ -199,11 +211,27 @@ class Manifest:
             self.data['completed_batches'].append(key)
         self.save()
     
-    def set_parameters(self, params: Dict) -> None:
-        """Set simulation parameters."""
+    def set_parameters(self, params: Dict, provenance: ProvenanceInfo = None) -> None:
+        """
+        Set simulation parameters and provenance.
+        
+        Args:
+            params: Run parameters.
+            provenance: Optional provenance info (created automatically if not provided).
+        """
         self.data['parameters'] = params
         self.data['start_time'] = datetime.now().isoformat()
+        
+        # Add provenance information
+        if provenance is None:
+            provenance = create_provenance(params)
+        self.data['provenance'] = provenance.to_dict()
+        
         self.save()
+    
+    def get_provenance(self) -> Dict[str, Any]:
+        """Get provenance information from manifest."""
+        return self.data.get('provenance', {})
 
 
 def run_orchestrator(
