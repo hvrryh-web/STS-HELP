@@ -146,6 +146,9 @@ def get_enemy_intent(enemy: EnemyState, rng: np.random.Generator, turn: int) -> 
     """
     Generate enemy intent for the current turn.
     
+    Based on Act 1 Elite patterns, damage is calibrated to create 
+    realistic win rates of 40-70% for starter decks.
+    
     Args:
         enemy: Enemy state.
         rng: Random number generator.
@@ -157,16 +160,21 @@ def get_enemy_intent(enemy: EnemyState, rng: np.random.Generator, turn: int) -> 
     roll = rng.random()
     
     if turn == 1:
-        return Intent.ATTACK, enemy.strength + 10
-    elif roll < 0.5:
-        attack_damage = 8 + enemy.strength + (turn // 4) * 2
+        # Strong opening attack
+        return Intent.ATTACK, enemy.strength + 16
+    elif roll < 0.6:
+        # After turn 1: 60% chance to attack with scaling damage
+        attack_damage = 12 + enemy.strength + (turn // 2) * 3
         return Intent.ATTACK, attack_damage
-    elif roll < 0.7:
-        return Intent.BUFF, 2
-    elif roll < 0.85:
-        return Intent.DEBUFF, 1
+    elif roll < 0.75:
+        # After turn 1: 15% chance to buff
+        return Intent.BUFF, 3
+    elif roll < 0.88:
+        # After turn 1: 13% chance to debuff
+        return Intent.DEBUFF, 2
     else:
-        return Intent.DEFEND, 8
+        # After turn 1: 12% chance to defend
+        return Intent.DEFEND, 10
 
 
 def evaluate_card_value(
