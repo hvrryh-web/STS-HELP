@@ -81,8 +81,8 @@ This document provides a comprehensive reference for Slay the Spire game mechani
    - Trigger end-of-turn effects
 
 4. **Enemy Turn**
+   - **Process poison damage** (START of enemy turn, before action)
    - Execute enemy intent
-   - Process poison damage (end of enemy turn)
    - Decrement debuffs
    - Select new intent
 
@@ -302,7 +302,7 @@ Formula:
 | Starting Relic | Cracked Core (channel 1 Lightning at start) |
 | Starting Orb Slots | 3 |
 
-**Starter Deck (12 cards)**:
+**Starter Deck (10 cards)**:
 - 4× Strike (1 energy, 6 damage)
 - 4× Defend (1 energy, 5 block)
 - 1× Zap (1 energy, channel Lightning)
