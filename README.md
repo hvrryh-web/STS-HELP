@@ -84,6 +84,7 @@ tools/
 |----------|-------------|
 | [Design Gap CRIT Report](docs/DESIGN_GAP_CRIT_REPORT.md) | Original critical review of design gaps and opportunities |
 | [Modeling System CRIT Report](docs/MODELING_SYSTEM_CRIT_REPORT.md) | Analysis of modeling methods, prediction accuracy, and improvement plan |
+| [Verification Report](docs/VERIFICATION_REPORT.md) | Data gaps, assumptions, and validation status for Monte Carlo simulations |
 
 ---
 
@@ -146,6 +147,30 @@ python validation_harness.py --characters Ironclad Silent Defect Watcher --runs 
 7. **orchestrator_unified.py** - Parallel batch runner with manifest resume
 8. **reporting.py** - Excel and PDF report generation
 9. **validation_harness.py** - Calibration and validation
+10. **simulation_config.py** - Explicit heuristics and variable-driven configuration
+
+### Monte Carlo Test Suites
+
+The simulation system includes two large-batch Monte Carlo test suites for validation:
+
+#### Suite 1: Veracity Tests
+- Deterministic reproducibility verification
+- Output bounds validation
+- Internal consistency checks (no impossible states)
+- Metadata logging completeness
+- Cross-character validation
+
+#### Suite 2: Stability Tests
+- Batch consistency analysis
+- Convergence with sample size
+- Variance bounds verification
+- Failure-tail analysis
+- Seed sensitivity testing
+
+Run the Monte Carlo tests:
+```bash
+pytest tests/test_monte_carlo_simulation.py -v
+```
 
 ### Patch ID System
 
