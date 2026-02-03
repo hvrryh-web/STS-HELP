@@ -1,0 +1,247 @@
+[
+  {
+    "name": "Bash",
+    "card_type": "Attack",
+    "cost": 2,
+    "rarity": "Common",
+    "tier_grade": "A",
+    "tier_score": 85.0,
+    "form_tags": ["Single-target"],
+    "function_tags": ["Damage", "Vulnerable"],
+    "fusion_tags": ["Front-loaded"],
+    "synergies": ["Vulnerable", "Heavy Blade", "Limit Break"],
+    "notes": "High damage with vulnerable application. Excellent in aggressive decks.",
+    "effects": {
+      "damage": 8,
+      "vulnerable": 2
+    },
+    "upgraded_effects": {
+      "damage": 10,
+      "vulnerable": 3
+    }
+  },
+  {
+    "name": "Heavy Blade",
+    "card_type": "Attack",
+    "cost": 2,
+    "rarity": "Common",
+    "tier_grade": "S",
+    "tier_score": 95.0,
+    "form_tags": ["Single-target"],
+    "function_tags": ["Damage", "Strength-scaling"],
+    "fusion_tags": ["Strength-scaling"],
+    "synergies": ["Strength", "Limit Break", "Demon Form", "Spot Weakness"],
+    "notes": "Core card for strength-scaling decks. Scales exponentially with strength.",
+    "effects": {
+      "base_damage": 14,
+      "strength_scaling": 3
+    },
+    "upgraded_effects": {
+      "base_damage": 14,
+      "strength_scaling": 5
+    }
+  },
+  {
+    "name": "Demon Form",
+    "card_type": "Power",
+    "cost": 3,
+    "rarity": "Rare",
+    "tier_grade": "S",
+    "tier_score": 92.0,
+    "form_tags": ["Power"],
+    "function_tags": ["Strength", "Scaling"],
+    "fusion_tags": ["Strength-scaling"],
+    "synergies": ["Heavy Blade", "Limit Break", "Whirlwind", "Sword Boomerang"],
+    "notes": "Premier scaling power. Wins long fights but expensive.",
+    "effects": {
+      "strength_per_turn": 2
+    }
+  },
+  {
+    "name": "Limit Break",
+    "card_type": "Skill",
+    "cost": 1,
+    "rarity": "Rare",
+    "tier_grade": "A",
+    "tier_score": 88.0,
+    "form_tags": ["Self-buff"],
+    "function_tags": ["Strength", "Exhaust"],
+    "fusion_tags": ["Strength-scaling"],
+    "synergies": ["Strength", "Heavy Blade", "Demon Form", "Spot Weakness"],
+    "notes": "Doubles strength. Powerful with other strength sources.",
+    "effects": {
+      "doubles_strength": true,
+      "exhausts": true
+    },
+    "upgraded_effects": {
+      "doubles_strength": true,
+      "exhausts": false
+    }
+  },
+  {
+    "name": "Corruption",
+    "card_type": "Power",
+    "cost": 3,
+    "rarity": "Rare",
+    "tier_grade": "S",
+    "tier_score": 98.0,
+    "form_tags": ["Power"],
+    "function_tags": ["Cost-reduction"],
+    "fusion_tags": ["Synergy-enabling"],
+    "synergies": ["Dead Branch", "Feel No Pain", "Dark Embrace"],
+    "notes": "Makes all skills cost 0 but exhaust. Game-winning with Dead Branch.",
+    "effects": {
+      "skills_cost_zero": true,
+      "skills_exhaust": true
+    }
+  },
+  {
+    "name": "Offering",
+    "card_type": "Skill",
+    "cost": 0,
+    "rarity": "Rare",
+    "tier_grade": "A",
+    "tier_score": 86.0,
+    "form_tags": ["Self-damage"],
+    "function_tags": ["Draw", "Energy", "Exhaust"],
+    "fusion_tags": ["Draw-engine"],
+    "synergies": ["Rupture", "Reaper", "Combustion"],
+    "notes": "Excellent cycle card. Self-damage synergizes with Rupture.",
+    "effects": {
+      "hp_cost": 6,
+      "draw": 3,
+      "energy": 2,
+      "exhausts": true
+    },
+    "upgraded_effects": {
+      "hp_cost": 6,
+      "draw": 5,
+      "energy": 2,
+      "exhausts": true
+    }
+  },
+  {
+    "name": "Inflame",
+    "card_type": "Power",
+    "cost": 1,
+    "rarity": "Uncommon",
+    "tier_grade": "B",
+    "tier_score": 75.0,
+    "form_tags": ["Power"],
+    "function_tags": ["Strength"],
+    "fusion_tags": ["Strength-scaling"],
+    "synergies": ["Heavy Blade", "Limit Break", "Whirlwind"],
+    "notes": "Solid early strength source. Less impactful late game.",
+    "effects": {
+      "strength": 2
+    },
+    "upgraded_effects": {
+      "strength": 3
+    }
+  },
+  {
+    "name": "Spot Weakness",
+    "card_type": "Skill",
+    "cost": 1,
+    "rarity": "Uncommon",
+    "tier_grade": "A",
+    "tier_score": 82.0,
+    "form_tags": ["Conditional"],
+    "function_tags": ["Strength"],
+    "fusion_tags": ["Strength-scaling"],
+    "synergies": ["Heavy Blade", "Limit Break", "Whirlwind"],
+    "notes": "Strong strength gain if enemy is attacking. Great for act 1.",
+    "effects": {
+      "strength": 3,
+      "condition": "enemy_attacking"
+    },
+    "upgraded_effects": {
+      "strength": 4,
+      "condition": "enemy_attacking"
+    }
+  },
+  {
+    "name": "Shrug It Off",
+    "card_type": "Skill",
+    "cost": 1,
+    "rarity": "Common",
+    "tier_grade": "B",
+    "tier_score": 72.0,
+    "form_tags": ["Defensive"],
+    "function_tags": ["Block", "Draw"],
+    "fusion_tags": ["Draw-engine"],
+    "synergies": ["Battle Trance", "Offering", "Feel No Pain"],
+    "notes": "Solid block with card draw. Good for deck cycling.",
+    "effects": {
+      "block": 8,
+      "draw": 1
+    },
+    "upgraded_effects": {
+      "block": 11,
+      "draw": 1
+    }
+  },
+  {
+    "name": "Feel No Pain",
+    "card_type": "Power",
+    "cost": 1,
+    "rarity": "Uncommon",
+    "tier_grade": "A",
+    "tier_score": 87.0,
+    "form_tags": ["Power"],
+    "function_tags": ["Block", "Exhaust-synergy"],
+    "fusion_tags": ["Exhaust-synergy"],
+    "synergies": ["Corruption", "True Grit", "Fiend Fire", "Dark Embrace"],
+    "notes": "Cornerstone of exhaust decks. Provides massive block with Corruption.",
+    "effects": {
+      "block_per_exhaust": 3
+    },
+    "upgraded_effects": {
+      "block_per_exhaust": 4
+    }
+  },
+  {
+    "name": "Battle Trance",
+    "card_type": "Skill",
+    "cost": 0,
+    "rarity": "Uncommon",
+    "tier_grade": "A",
+    "tier_score": 83.0,
+    "form_tags": ["Draw"],
+    "function_tags": ["Draw"],
+    "fusion_tags": ["Draw-engine"],
+    "synergies": ["Offering", "Seeing Red"],
+    "notes": "Excellent draw card. Cannot draw for rest of turn is minor downside.",
+    "effects": {
+      "draw": 3,
+      "cannot_draw": true
+    },
+    "upgraded_effects": {
+      "draw": 4,
+      "cannot_draw": true
+    }
+  },
+  {
+    "name": "Whirlwind",
+    "card_type": "Attack",
+    "cost": -1,
+    "rarity": "Uncommon",
+    "tier_grade": "A",
+    "tier_score": 84.0,
+    "form_tags": ["AoE", "X-cost"],
+    "function_tags": ["Damage", "Strength-scaling"],
+    "fusion_tags": ["Strength-scaling"],
+    "synergies": ["Strength", "Demon Form", "Limit Break", "Neow's Lament"],
+    "notes": "Best AoE for Ironclad. Scales with strength and energy.",
+    "effects": {
+      "damage": 5,
+      "times": "X",
+      "targets": "all_enemies"
+    },
+    "upgraded_effects": {
+      "damage": 8,
+      "times": "X",
+      "targets": "all_enemies"
+    }
+  }
+]
