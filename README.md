@@ -23,6 +23,15 @@ This repository provides a comprehensive knowledge base and production-grade sim
 - **Excel and PDF reporting** with Patch ID traceability
 - **Decision-value metrics** (EV, PV, RV, APV, UPV, GGV, SGV, CGV, ATV, JV)
 
+### Monte Carlo Simulation Engine (NEW)
+- **4 Scenario Types**: BASE, COMPLEX, IDEAL, RANDOM for comprehensive testing
+- **Data Models**: Type-safe Card, Relic, and Deck dataclasses with tier scoring
+- **Deck Evaluation**: Composite scoring formula (0.4Q + 0.25S + 0.15C + 0.10K + 0.10R)
+- **Metrics Collection**: Win rate, median turns, variance, 5% tail-risk analysis
+- **Data Verification**: Cross-reference validation against community sources
+- **Multi-Format Documentation**: Auto-generate PDF, DOCX, and XLSX reports
+- **Reproducible Seeds**: Deterministic PRNG (20260202, 31415926) for verification
+
 ---
 
 ## 📚 Knowledge Base Structure
@@ -44,13 +53,28 @@ data/
 │   ├── ironclad_cards.json      # All Ironclad cards
 │   ├── silent_cards.json        # All Silent cards
 │   ├── defect_cards.json        # All Defect cards
-│   └── watcher_cards.json       # All Watcher cards
+│   ├── watcher_cards.json       # All Watcher cards
+│   ├── ironclad_cards_sample.json  # Sample with tier grades
+│   └── example_decks.json       # Pre-evaluated deck examples
 ├── relics/
 │   └── relics.json              # All relics by category
 ├── enemies/
 │   └── enemies.json             # Enemy stats and patterns
 └── keywords/
     └── keywords.json            # Game keyword definitions
+
+src/
+├── simulation/
+│   ├── simulator.py             # Monte Carlo simulation engine
+│   └── metrics.py               # Metrics collection (win rate, tail-risk, etc.)
+├── models/
+│   ├── card.py                  # Card dataclass with tier scoring
+│   ├── relic.py                 # Relic dataclass
+│   └── deck.py                  # Deck evaluation with composite formula
+├── verification/
+│   └── verifier.py              # Data cross-reference validation
+└── docs/
+    └── generator.py             # Multi-format documentation generator
 
 tools/
 ├── synergy_analyzer.py          # Card/relic synergy analysis tool
@@ -119,6 +143,93 @@ python -c "import reporting; reporting.generate_pdf('unified_outputs', 'PATCH-ID
 
 ```bash
 python validation_harness.py --characters Ironclad Silent Defect Watcher --runs 1000
+```
+
+### Use Monte Carlo Simulation Engine
+
+The new Monte Carlo simulation engine provides a clean API for running simulations:
+
+```python
+from src.simulation.simulator import MonteCarloSimulator
+
+# Initialize simulator
+simulator = MonteCarloSimulator(
+    root_seed=20260202,
+    iterations=10000,
+    character="Ironclad"
+)
+
+# Run single scenario
+results = simulator.run_base_scenario()
+print(f"Win rate: {results['win_rate']:.2f}%")
+
+# Run all scenarios
+all_results = simulator.run_all_scenarios()
+
+# Compare scenarios
+comparison = MonteCarloSimulator.compare_scenarios(all_results)
+print(f"Best scenario: {comparison['best_scenario']}")
+```
+
+### Evaluate Decks
+
+Use the deck evaluation system to score deck compositions:
+
+```python
+from src.models.card import Card, CardType, Rarity
+from src.models.deck import DeckEvaluation
+
+# Build a deck
+cards = [
+    Card("Heavy Blade", CardType.ATTACK, 2, Rarity.COMMON, tier_score=95.0),
+    Card("Inflame", CardType.POWER, 1, Rarity.UNCOMMON, tier_score=75.0),
+    # ... more cards
+]
+
+# Evaluate the deck
+deck = DeckEvaluation(cards=cards, name="Strength Scaling")
+score = deck.calculate_score()
+breakdown = deck.get_breakdown()
+
+print(f"Overall Score: {score}")
+print(f"Card Quality: {breakdown['card_quality']}")
+print(f"Synergy: {breakdown['synergy_coherence']}")
+```
+
+### Generate Documentation
+
+Auto-generate reports in multiple formats:
+
+```python
+from src.docs.generator import generate_documentation
+
+# Simulation results from above
+results = simulator.run_all_scenarios()
+
+# Generate all formats (PDF, DOCX, XLSX)
+outputs = generate_documentation(
+    simulation_results={"scenarios": results},
+    output_dir="./outputs"
+)
+
+print(f"Generated: {outputs}")
+# Output: {'pdf': Path('...'), 'docx': Path('...'), 'xlsx': Path('...')}
+```
+
+### Verify Data
+
+Run data verification to check card mechanics and relic interactions:
+
+```python
+from src.verification.verifier import verify_data
+
+# Verify all game data
+report = verify_data(output_path="./verification_report.json")
+
+if report["passed"]:
+    print(f"✓ Verified {report['verified_count']} items")
+else:
+    print(f"✗ Found {report['error_count']} errors")
 ```
 
 ---
