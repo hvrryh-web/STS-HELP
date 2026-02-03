@@ -1,0 +1,151 @@
+{
+  "decks": [
+    {
+      "name": "Aggro Ramp",
+      "character": "Ironclad",
+      "archetype": "Strength Scaling",
+      "description": "Fast-paced strength-based deck with heavy damage output",
+      "cards": [
+        {"name": "Heavy Blade", "copies": 2},
+        {"name": "Bash", "copies": 1},
+        {"name": "Inflame", "copies": 2},
+        {"name": "Spot Weakness", "copies": 2},
+        {"name": "Limit Break", "copies": 1},
+        {"name": "Strike", "copies": 5},
+        {"name": "Defend", "copies": 4},
+        {"name": "Shrug It Off", "copies": 2},
+        {"name": "Battle Trance", "copies": 1}
+      ],
+      "relics": [
+        {"name": "Burning Blood", "tier_score": 60.0},
+        {"name": "Vajra", "tier_score": 85.0},
+        {"name": "Bag of Marbles", "tier_score": 70.0}
+      ],
+      "evaluation": {
+        "card_quality": 76.5,
+        "synergy_coherence": 82.0,
+        "curve_smoothness": 78.0,
+        "consistency": 81.0,
+        "relic_impact": 71.7,
+        "overall_score": 78.4,
+        "deck_size": 20,
+        "relic_count": 3
+      },
+      "notes": "Solid early-game deck with good scaling. Vulnerable to AoE and multi-enemy fights."
+    },
+    {
+      "name": "Block-Value",
+      "character": "Ironclad",
+      "archetype": "Defensive",
+      "description": "High-block deck with sustainable defense",
+      "cards": [
+        {"name": "Feel No Pain", "copies": 2},
+        {"name": "True Grit", "copies": 2},
+        {"name": "Shrug It Off", "copies": 3},
+        {"name": "Defend", "copies": 5},
+        {"name": "Strike", "copies": 5},
+        {"name": "Bash", "copies": 1},
+        {"name": "Heavy Blade", "copies": 1},
+        {"name": "Inflame", "copies": 1},
+        {"name": "Battle Trance", "copies": 2},
+        {"name": "Offering", "copies": 1}
+      ],
+      "relics": [
+        {"name": "Burning Blood", "tier_score": 60.0},
+        {"name": "Orichalcum", "tier_score": 78.0},
+        {"name": "Anchor", "tier_score": 75.0},
+        {"name": "Thread and Needle", "tier_score": 68.0}
+      ],
+      "evaluation": {
+        "card_quality": 74.8,
+        "synergy_coherence": 85.5,
+        "curve_smoothness": 82.5,
+        "consistency": 88.0,
+        "relic_impact": 70.3,
+        "overall_score": 82.1,
+        "deck_size": 23,
+        "relic_count": 4
+      },
+      "notes": "Excellent sustainability. Can struggle against time-pressure fights (Time Eater, Heart)."
+    },
+    {
+      "name": "Corruption-DeadBranch",
+      "character": "Ironclad",
+      "archetype": "Infinite/Synergy",
+      "description": "Legendary combo deck with Corruption + Dead Branch",
+      "cards": [
+        {"name": "Corruption", "copies": 1},
+        {"name": "Feel No Pain", "copies": 2},
+        {"name": "Dark Embrace", "copies": 1},
+        {"name": "Battle Trance", "copies": 2},
+        {"name": "Offering", "copies": 1},
+        {"name": "Shrug It Off", "copies": 3},
+        {"name": "True Grit", "copies": 2},
+        {"name": "Defend", "copies": 4},
+        {"name": "Strike", "copies": 4},
+        {"name": "Heavy Blade", "copies": 1},
+        {"name": "Inflame", "copies": 1}
+      ],
+      "relics": [
+        {"name": "Burning Blood", "tier_score": 60.0},
+        {"name": "Dead Branch", "tier_score": 98.0},
+        {"name": "Runic Pyramid", "tier_score": 82.0},
+        {"name": "Tungsten Rod", "tier_score": 76.0}
+      ],
+      "evaluation": {
+        "card_quality": 82.3,
+        "synergy_coherence": 95.0,
+        "curve_smoothness": 85.0,
+        "consistency": 90.0,
+        "relic_impact": 95.0,
+        "overall_score": 90.3,
+        "deck_size": 22,
+        "relic_count": 4
+      },
+      "notes": "Top-tier endgame deck. Requires Dead Branch and Corruption. Nearly unstoppable when assembled."
+    }
+  ],
+  "scoring_formula": {
+    "description": "Composite Deck Evaluation Formula",
+    "formula": "Score = 0.4Q + 0.25S + 0.15C + 0.10K + 0.10R",
+    "components": {
+      "Q": {
+        "name": "Card Quality",
+        "weight": 0.4,
+        "description": "Average tier score of all cards in deck"
+      },
+      "S": {
+        "name": "Synergy Coherence",
+        "weight": 0.25,
+        "description": "Density of synergistic interactions between cards"
+      },
+      "C": {
+        "name": "Curve Smoothness",
+        "weight": 0.15,
+        "description": "Distribution of cards across mana costs"
+      },
+      "K": {
+        "name": "Consistency",
+        "weight": 0.1,
+        "description": "Deck size and card redundancy optimization"
+      },
+      "R": {
+        "name": "Relic Impact",
+        "weight": 0.1,
+        "description": "Synergy between relics and deck strategy"
+      }
+    },
+    "ideal_ranges": {
+      "deck_size": "25-35 cards",
+      "card_quality": "70-90",
+      "synergy_coherence": "75-95",
+      "curve_smoothness": "70-85"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "created": "2026-02-03",
+    "character": "Ironclad",
+    "evaluation_system": "Monte Carlo Deck Evaluation Model"
+  }
+}
